@@ -1,0 +1,34 @@
+#include "stdafx.h"
+#include "SFMLApp.h"
+#include <sstream>
+
+
+bool SFMLApp::OnInit(void)
+{
+	m_mainWindow.create(sf::VideoMode(800, 600, 32), "ASCII-Palette");
+
+	TextureManager& textureManager = TextureManager::getInstance();
+	sf::Image cursesAImage;
+	cursesAImage.loadFromFile("assets/graphics/curses_640x300.bmp");
+	cursesAImage.createMaskFromColor(sf::Color::Magenta);
+	textureManager.addTextureFromImage(cursesAImage,"CursesA");
+	const sf::Texture& cursesA = textureManager.getTexture("CursesA");
+	SpriteManager& spriteManager = SpriteManager::getInstance();
+	char k = 0;
+	for(int i = 0; i < 16; i++)
+	{
+		for(int j = 0; j< 16; j++)
+		{
+			std::string str("CursesA_ASCII");
+			str += k;
+			spriteManager.addSprite(sf::Sprite(textureManager.getTexture("CursesA"),sf::IntRect(j*8, i*12, 8, 12)),str);
+			k++;
+		}
+	}
+
+	std::unique_ptr<GameState_DrawingState> drawingState(new GameState_DrawingState());
+	registerState(std::move(drawingState), "Drawing");
+	changeState("Drawing", nullptr);
+
+	return true;
+}

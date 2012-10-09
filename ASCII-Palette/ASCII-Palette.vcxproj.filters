@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="SFMLApp">
+      <UniqueIdentifier>{b05f297e-ec50-40e2-813a-df3f967011e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML-Template">
+      <UniqueIdentifier>{f8299adc-9f16-4cdd-af9a-fd903836a31e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SFML-Template\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="SFML-Template\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SFML-Template\AnimatedSprite.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\FontManager.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\Functor.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\GameStateBase.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\ImageManager.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\SFMLButton.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\SFMLEvent.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\SFMLGUIElement.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\SFMLStateInfo.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\SFMLStateMessage.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\SoundManager.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\SpriteManager.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SFML-Template\TextureManager.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>SFMLApp</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>SFMLApp</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLApp.h">
+      <Filter>SFMLApp</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState_DrawingState.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SFML-Template\AnimatedSprite.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Template\FontManager.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Template\GameStateBase.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Template\ImageManager.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Template\SFMLButton.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Template\SFMLEvent.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Template\SFMLGUIElement.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Template\SoundManager.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Template\SpriteManager.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SFML-Template\TextureManager.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ASCII-Palette.cpp">
+      <Filter>SFMLApp</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>SFMLApp</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLApp.cpp">
+      <Filter>SFMLApp</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLApp_OnUpdate.cpp">
+      <Filter>SFMLApp</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLApp_OnCleanup.cpp">
+      <Filter>SFMLApp</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLApp_OnEvent.cpp">
+      <Filter>SFMLApp</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLApp_OnInit.cpp">
+      <Filter>SFMLApp</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLApp_OnRender.cpp">
+      <Filter>SFMLApp</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_DrawingState.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
