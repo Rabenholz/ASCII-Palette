@@ -9,6 +9,7 @@ SFMLColorPalette::SFMLColorPalette(const sf::Window& window, const sf::Image& co
 	m_colorMagnify.setOutlineThickness(5.0f);
 	m_colorMagnify.setOutlineColor(sf::Color::Black);
 	setMouseRolloverFunction(std::make_shared<TFunctor<SFMLColorPalette>>(this, &SFMLColorPalette::updateColorMagnify));
+	setMouseLeftClickedFunction(std::make_shared<TFunctor<SFMLColorPalette>>(this, &SFMLColorPalette::selectColorAtMouse));
 }
 
 
@@ -39,6 +40,11 @@ sf::FloatRect SFMLColorPalette::getGlobalBounds() const
 	return getTransform().transformRect(m_display.getGlobalBounds());
 }
 
+sf::Color SFMLColorPalette::getSelectedColor() const
+{
+	return m_selectedColor;
+}
+
 void SFMLColorPalette::updateColorMagnify()
 {
 	sf::Vector2f localMouseFloat(getLocalPoint(sf::Mouse::getPosition(m_window)));
@@ -46,4 +52,10 @@ void SFMLColorPalette::updateColorMagnify()
 	m_colorMagnify.setPosition(localMouseFloat.x - m_colorMagnify.getLocalBounds().width - 5.0f, 
 		localMouseFloat.y - m_colorMagnify.getLocalBounds().height - 5.0f);
 	m_colorMagnify.setFillColor(m_colorImage.getPixel(localMouse.x, localMouse.y));
+}
+
+void SFMLColorPalette::selectColorAtMouse()
+{
+	sf::Vector2i localMouse(getLocalPoint(sf::Mouse::getPosition(m_window)));
+	m_selectedColor = m_colorImage.getPixel(localMouse.x, localMouse.y);
 }

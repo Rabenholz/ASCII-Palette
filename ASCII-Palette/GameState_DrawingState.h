@@ -18,5 +18,6 @@ public:
 	virtual void OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift);
 private:
 	SFMLColorPalette* m_colorPicker;
+	sf::RectangleShape* m_rectangle;
 };
 

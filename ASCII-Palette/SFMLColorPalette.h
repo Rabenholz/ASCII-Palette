@@ -10,12 +10,16 @@ public:
 	virtual sf::FloatRect getLocalBounds() const;
 	virtual sf::FloatRect getGlobalBounds() const;
 
+	sf::Color getSelectedColor() const;
+
 	void updateColorMagnify();
+	void selectColorAtMouse();
 
 private:
 	const sf::Image& m_colorImage;
 	sf::Sprite m_display;
 	sf::RectangleShape m_colorMagnify;
+	sf::Color m_selectedColor;
 
 };
 
