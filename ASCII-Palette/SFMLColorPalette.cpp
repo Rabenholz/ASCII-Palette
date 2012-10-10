@@ -2,8 +2,9 @@
 #include "SFMLColorPalette.h"
 
 
-SFMLColorPalette::SFMLColorPalette(const sf::Image& colorImage, const sf::Texture& colorTexture)
-	:m_colorImage(colorImage), m_display(colorTexture), m_colorMagnify(sf::Vector2f(50.0f,50.0f))
+SFMLColorPalette::SFMLColorPalette(const sf::Window& window, const sf::Image& colorImage, const sf::Texture& colorTexture)
+	:SFMLGUIElement(window),
+	 m_colorImage(colorImage), m_display(colorTexture), m_colorMagnify(sf::Vector2f(50.0f,50.0f))
 {
 	m_colorMagnify.setOutlineThickness(5.0f);
 	m_colorMagnify.setOutlineColor(sf::Color::Black);
@@ -19,8 +20,14 @@ void SFMLColorPalette::draw(sf::RenderTarget& target, sf::RenderStates states) c
 {
 	states.transform *= getTransform();
 	target.draw(m_display, states);
-	if(getGlobalBounds().contains(sf::Vector2f(static_cast<float>(m_mouseX), static_cast<float>(m_mouseY))))
+	//only for circular, probably should mitigate this to a subclass or something
+	float radius = getLocalBounds().width/2.0f;
+	sf::Vector2f center(getGlobalBounds().left + radius, getGlobalBounds().top + radius);
+	if(std::pow(radius,2) > std::pow(sf::Mouse::getPosition(m_window).x - center.x,2) + std::pow(sf::Mouse::getPosition(m_window).y - center.y,2))
+	{
 		target.draw(m_colorMagnify, states);
+	}
+	
 }
 
 sf::FloatRect SFMLColorPalette::getLocalBounds() const
@@ -34,8 +41,8 @@ sf::FloatRect SFMLColorPalette::getGlobalBounds() const
 
 void SFMLColorPalette::updateColorMagnify()
 {
-	sf::Vector2f localMouseFloat(getLocalPoint(static_cast<float>(m_mouseX), static_cast<float>(m_mouseY)));
-	sf::Vector2i localMouse(static_cast<int>(localMouseFloat.x),static_cast<int>(localMouseFloat.y));
+	sf::Vector2f localMouseFloat(getLocalPoint(sf::Mouse::getPosition(m_window)));
+	sf::Vector2i localMouse(getLocalPoint(sf::Mouse::getPosition(m_window)));
 	m_colorMagnify.setPosition(localMouseFloat.x - m_colorMagnify.getLocalBounds().width - 5.0f, 
 		localMouseFloat.y - m_colorMagnify.getLocalBounds().height - 5.0f);
 	m_colorMagnify.setFillColor(m_colorImage.getPixel(localMouse.x, localMouse.y));

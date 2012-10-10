@@ -31,7 +31,7 @@ bool SFMLApp::OnInit(void)
 	TextureManager::getInstance().addTextureFromImage(colorWheel, "ColorWheel");
 	const sf::Texture& colorWheelTexture(TextureManager::getInstance().getTexture("ColorWheel"));
 
-	std::unique_ptr<GameState_DrawingState> drawingState(new GameState_DrawingState());
+	std::unique_ptr<GameState_DrawingState> drawingState(new GameState_DrawingState(m_mainWindow));
 	registerState(std::move(drawingState), "Drawing");
 	changeState("Drawing", nullptr);
 

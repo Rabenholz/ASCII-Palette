@@ -4,7 +4,7 @@
 class GameState_DrawingState : public GameStateBase
 {
 public:
-	GameState_DrawingState(void);
+	GameState_DrawingState(const sf::Window& window);
 	virtual ~GameState_DrawingState(void);
 
 	virtual void OnAwake(const SFMLStateInfo* lStateInfo);

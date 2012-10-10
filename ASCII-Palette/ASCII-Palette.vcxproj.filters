@@ -75,11 +75,11 @@
     <ClInclude Include="SFMLApp.h">
       <Filter>SFMLApp</Filter>
     </ClInclude>
-    <ClInclude Include="SFMLColorPalette.h">
-      <Filter>SFML-Template\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameState_DrawingState.h">
       <Filter>SFMLApp</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLColorPalette.h">
+      <Filter>SFMLGUIElement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,11 +137,11 @@
     <ClCompile Include="SFMLApp_OnRender.cpp">
       <Filter>SFMLApp</Filter>
     </ClCompile>
-    <ClCompile Include="SFMLColorPalette.cpp">
-      <Filter>SFML-Template\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameState_DrawingState.cpp">
       <Filter>SFMLApp</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLColorPalette.cpp">
+      <Filter>SFMLGUIElement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

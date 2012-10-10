@@ -5,7 +5,7 @@
 #include "SFMLApp.h"
 
 
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, _TCHAR* argv[])
 {
 	SFMLApp asciiPalette;
 	int exitCode = asciiPalette.OnExecute();

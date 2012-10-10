@@ -3,7 +3,7 @@
 class SFMLColorPalette : public SFMLGUIElement
 {
 public:
-	SFMLColorPalette(const sf::Image& colorImage, const sf::Texture& colorTexture);
+	SFMLColorPalette(const sf::Window& window, const sf::Image& colorImage, const sf::Texture& colorTexture);
 	virtual ~SFMLColorPalette(void);
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

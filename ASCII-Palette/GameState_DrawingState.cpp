@@ -2,7 +2,8 @@
 #include "GameState_DrawingState.h"
 
 
-GameState_DrawingState::GameState_DrawingState(void)
+GameState_DrawingState::GameState_DrawingState(const sf::Window& window)
+	:GameStateBase(window)
 {
 }
 
@@ -13,7 +14,7 @@ GameState_DrawingState::~GameState_DrawingState(void)
 
 void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 {
-	std::unique_ptr<SFMLColorPalette> colorPicker(new SFMLColorPalette(ImageManager::getInstance().getImage("ColorWheel"), 
+	std::unique_ptr<SFMLColorPalette> colorPicker(new SFMLColorPalette(m_window, ImageManager::getInstance().getImage("ColorWheel"), 
 		TextureManager::getInstance().getTexture("ColorWheel")));
 	m_colorPicker = colorPicker.get();
 	colorPicker->setPosition(200.0f, 200.0f);
