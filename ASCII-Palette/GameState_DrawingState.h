@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML-Template/GameStateBase.h"
+#include "SFMLColorPalette.h"
 class GameState_DrawingState : public GameStateBase
 {
 public:
@@ -15,5 +16,7 @@ public:
 
 	//SFMLEvent Overrides
 	virtual void OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift);
+private:
+	SFMLColorPalette* m_colorPicker;
 };
 

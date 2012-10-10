@@ -19,6 +19,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="SFMLGUIElement">
+      <UniqueIdentifier>{e5c54946-fb37-4868-8207-2ccc6968873c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -72,8 +75,11 @@
     <ClInclude Include="SFMLApp.h">
       <Filter>SFMLApp</Filter>
     </ClInclude>
-    <ClInclude Include="GameState_DrawingState.h">
+    <ClInclude Include="SFMLColorPalette.h">
       <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState_DrawingState.h">
+      <Filter>SFMLApp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -131,8 +137,11 @@
     <ClCompile Include="SFMLApp_OnRender.cpp">
       <Filter>SFMLApp</Filter>
     </ClCompile>
-    <ClCompile Include="GameState_DrawingState.cpp">
+    <ClCompile Include="SFMLColorPalette.cpp">
       <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_DrawingState.cpp">
+      <Filter>SFMLApp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

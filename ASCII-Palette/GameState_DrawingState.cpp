@@ -13,6 +13,11 @@ GameState_DrawingState::~GameState_DrawingState(void)
 
 void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 {
+	std::unique_ptr<SFMLColorPalette> colorPicker(new SFMLColorPalette(ImageManager::getInstance().getImage("ColorWheel"), 
+		TextureManager::getInstance().getTexture("ColorWheel")));
+	m_colorPicker = colorPicker.get();
+	colorPicker->setPosition(200.0f, 200.0f);
+	addGUIElement(std::move(colorPicker));
 }
 void GameState_DrawingState::OnUpdate(void)
 {

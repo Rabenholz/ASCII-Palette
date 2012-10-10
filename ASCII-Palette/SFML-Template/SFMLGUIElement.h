@@ -13,6 +13,7 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates) const = 0;
 	virtual sf::FloatRect getLocalBounds(void) const = 0;
 	virtual sf::FloatRect getGlobalBounds(void) const = 0;
+	sf::Vector2f getLocalPoint(float x, float y) const;
 
 	void OnMouseLeftPressed(int x, int y);
 	void OnMouseLeftReleased(int x, int y);
