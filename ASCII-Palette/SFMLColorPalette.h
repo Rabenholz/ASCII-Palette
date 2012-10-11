@@ -12,14 +12,21 @@ public:
 
 	sf::Color getSelectedColor() const;
 
+	void onLeftClick();
 	void updateColorMagnify();
 	void selectColorAtMouse();
+	void selectBrightnessAtMouse();
 
 private:
 	const sf::Image& m_colorImage;
 	sf::Sprite m_display;
+	sf::RectangleShape m_backing;
 	sf::RectangleShape m_colorMagnify;
 	sf::Color m_selectedColor;
+	sf::RectangleShape m_brightnessRect;
+	sf::VertexArray m_brightnessQuad;
+	sf::RectangleShape m_brightnessSlider;
+	float m_brightness;
 
 };
 
