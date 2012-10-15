@@ -17,14 +17,19 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	std::unique_ptr<SFMLColorPalette> colorPicker(new SFMLColorPalette(m_window, ImageManager::getInstance().getImage("ColorWheel"), 
 		TextureManager::getInstance().getTexture("ColorWheel")));
 	m_colorPicker = colorPicker.get();
-	colorPicker->setPosition(200.0f, 200.0f);
+	colorPicker->setPosition(0.0f, 300.0f);
 	std::unique_ptr<sf::RectangleShape> colorSelected(new sf::RectangleShape(sf::Vector2f(20.0f, 20.0f)));
 	m_rectangle = colorSelected.get();
 	colorSelected->setPosition(150.0f, 150.0f);
 	colorSelected->setOutlineThickness(2.0f);
 	colorSelected->setOutlineColor(sf::Color::White);
+
+	std::unique_ptr<SFMLCursesChar> char1(new SFMLCursesChar(m_window, 'a', sf::Color::Blue, sf::Color::Green));
+	char1->setPosition(400.0f, 200.0f);
+
 	addGUIElement(std::move(colorPicker));
 	addDrawable(std::move(colorSelected));
+	addGUIElement(std::move(char1));
 }
 void GameState_DrawingState::OnUpdate(void)
 {

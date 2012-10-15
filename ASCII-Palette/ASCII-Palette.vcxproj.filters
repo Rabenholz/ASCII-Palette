@@ -81,6 +81,9 @@
     <ClInclude Include="SFMLColorPalette.h">
       <Filter>SFMLGUIElement</Filter>
     </ClInclude>
+    <ClInclude Include="SFMLCursesChar.h">
+      <Filter>SFMLGUIElement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML-Template\AnimatedSprite.cpp">
@@ -141,6 +144,9 @@
       <Filter>SFMLApp</Filter>
     </ClCompile>
     <ClCompile Include="SFMLColorPalette.cpp">
+      <Filter>SFMLGUIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLCursesChar.cpp">
       <Filter>SFMLGUIElement</Filter>
     </ClCompile>
   </ItemGroup>
