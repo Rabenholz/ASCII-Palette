@@ -23,13 +23,15 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	colorSelected->setPosition(150.0f, 150.0f);
 	colorSelected->setOutlineThickness(2.0f);
 	colorSelected->setOutlineColor(sf::Color::White);
-
-	std::unique_ptr<SFMLCursesChar> char1(new SFMLCursesChar(m_window, 'a', sf::Color::Blue, sf::Color::Green));
-	char1->setPosition(400.0f, 200.0f);
+	
+	std::unique_ptr<SFMLCursesWindow> cursesWindow(new SFMLCursesWindow(m_window, sf::Vector2i(10,10)));
+	cursesWindow->clearTiles("s", sf::Color::Blue, sf::Color::Green);
+	cursesWindow->setTile(SFMLCursesChar(m_window, "a", sf::Color::Red, sf::Color::Cyan), sf::Vector2i(2,2));
+	cursesWindow->setPosition(400,200);
 
 	addGUIElement(std::move(colorPicker));
 	addDrawable(std::move(colorSelected));
-	addGUIElement(std::move(char1));
+	addGUIElement(std::move(cursesWindow));
 }
 void GameState_DrawingState::OnUpdate(void)
 {

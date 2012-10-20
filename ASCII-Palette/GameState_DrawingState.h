@@ -2,6 +2,7 @@
 #include "SFML-Template/GameStateBase.h"
 #include "SFMLColorPalette.h"
 #include "SFMLCursesChar.h"
+#include "SFMLCursesWindow.h"
 class GameState_DrawingState : public GameStateBase
 {
 public:

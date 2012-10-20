@@ -94,6 +94,7 @@
     <ClInclude Include="SFMLApp.h" />
     <ClInclude Include="SFMLColorPalette.h" />
     <ClInclude Include="SFMLCursesChar.h" />
+    <ClInclude Include="SFMLCursesWindow.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -118,6 +119,7 @@
     <ClCompile Include="SFMLApp_OnUpdate.cpp" />
     <ClCompile Include="SFMLColorPalette.cpp" />
     <ClCompile Include="SFMLCursesChar.cpp" />
+    <ClCompile Include="SFMLCursesWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
