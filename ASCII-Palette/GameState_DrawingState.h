@@ -3,6 +3,7 @@
 #include "SFMLColorPalette.h"
 #include "SFMLCursesChar.h"
 #include "SFMLCursesWindow.h"
+#include <fstream>
 class GameState_DrawingState : public GameStateBase
 {
 public:
@@ -16,10 +17,14 @@ public:
 	virtual void OnSuspend(void);
 	virtual void OnResume(void);
 
+	void saveAPF(const std::string& fileName);
+	std::unique_ptr<SFMLCursesWindow> loadAPF(const std::string& fileName);
+
 	//SFMLEvent Overrides
 	virtual void OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift);
 private:
 	SFMLColorPalette* m_colorPicker;
 	sf::RectangleShape* m_rectangle;
+	SFMLCursesWindow* m_drawingBoard;
 };
 

@@ -14,15 +14,20 @@ public:
 
 	void setCharColor(const sf::Color& color);
 	void setBackgroundColor(const sf::Color& color);
-	void setCharacter(char character);
+	void setCharacter(std::string character);
 
 	const sf::Color& getCharColor() const;
 	const sf::Color& getBackgroundColor() const;
 	std::string getCharacter() const;
 
-private:
+	friend std::ostream& operator<<(std::ostream& os, const SFMLCursesChar& cursesChar);
+	friend std::istream& operator>>(std::istream& is, SFMLCursesChar& cursesChar);
+
+protected:
 	std::string m_character;
 	sf::RectangleShape m_backRect;
 	sf::Sprite m_charSprite;
 };
 
+std::ostream& operator<<(std::ostream& os, const SFMLCursesChar& cursesChar);
+std::istream& operator>>(std::istream& is, SFMLCursesChar& cursesChar);

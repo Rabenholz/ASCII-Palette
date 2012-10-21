@@ -13,12 +13,6 @@ SFMLCursesWindow::SFMLCursesWindow(const sf::Window& window, const sf::Vector2i&
 	m_rectangle.setFillColor(sf::Color(0,0,0,0));
 }
 
-
-SFMLCursesWindow::~SFMLCursesWindow(void)
-{
-}
-
-
 void SFMLCursesWindow::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
@@ -91,4 +85,37 @@ void SFMLCursesWindow::setCursesSize(const sf::Vector2i& lCursesSize)
 sf::Vector2i SFMLCursesWindow::getCursesSize() const
 {
 	return m_cursesSize;
+}
+
+std::ostream& operator<<(std::ostream& os, const SFMLCursesWindow& cursesWindow)
+{
+	os<<cursesWindow.m_cursesSize.x<<" "<<cursesWindow.m_cursesSize.y<<"\n";
+	for(int i = 0; i<cursesWindow.m_cursesSize.x; i++) //lines
+	{
+		for(int j = 0; j<cursesWindow.m_cursesSize.y; j++) //columns
+		{
+			os<<*(cursesWindow.m_tiles[i][j]);
+		}
+	}
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, SFMLCursesWindow& cursesWindow)
+{
+	sf::Vector2i cursesSize;
+	is>>cursesSize.x>>cursesSize.y;
+	cursesWindow.setCursesSize(cursesSize);
+	for(int i = 0; i<cursesSize.x; i++) //lines
+	{
+		for(int j = 0; j<cursesSize.y; j++) //columns
+		{
+			if(is.good())
+			{
+				SFMLCursesChar cursesChar(cursesWindow.m_window, " ");
+				is>>cursesChar;
+				cursesWindow.setTile(cursesChar, sf::Vector2i(i,j));
+			}
+		}
+	}
+	return is;
 }

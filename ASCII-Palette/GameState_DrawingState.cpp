@@ -24,9 +24,10 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	colorSelected->setOutlineThickness(2.0f);
 	colorSelected->setOutlineColor(sf::Color::White);
 	
-	std::unique_ptr<SFMLCursesWindow> cursesWindow(new SFMLCursesWindow(m_window, sf::Vector2i(10,10)));
+	std::unique_ptr<SFMLCursesWindow> cursesWindow(new SFMLCursesWindow(m_window, sf::Vector2i(4,10)));
+	m_drawingBoard = cursesWindow.get();
 	cursesWindow->clearTiles("s", sf::Color::Blue, sf::Color::Green);
-	cursesWindow->setTile(SFMLCursesChar(m_window, "a", sf::Color::Red, sf::Color::Cyan), sf::Vector2i(2,2));
+	cursesWindow->setTile(SFMLCursesChar(m_window, "a", sf::Color::Red, sf::Color::Cyan), sf::Vector2i(2,6));
 	cursesWindow->setPosition(400,200);
 
 	addGUIElement(std::move(colorPicker));
@@ -52,10 +53,50 @@ void GameState_DrawingState::OnResume(void)
 {
 }
 
+void GameState_DrawingState::saveAPF(const std::string& fileName)
+{
+	std::string extFileName(fileName);
+	extFileName += ".apf";
+	std::ofstream write(extFileName, std::ios::out);
+	write<<(*m_drawingBoard);
+	write.close();
+}
+
+std::unique_ptr<SFMLCursesWindow> GameState_DrawingState::loadAPF(const std::string& fileName)
+{
+	std::string extFileName(fileName);
+	extFileName += ".apf";
+	std::ifstream read(extFileName, std::ios::in);
+	if(read.is_open())
+	{
+		std::unique_ptr<SFMLCursesWindow> cursesWindow(new SFMLCursesWindow(m_window, sf::Vector2i(1,1)));
+		read>>(*cursesWindow);
+		read.close();
+		return cursesWindow;
+	}
+	else
+	{
+		//throw an exception here instead
+		printf("FAILED TO OPEN FILE %s\n", extFileName.c_str());
+		return std::unique_ptr<SFMLCursesWindow>(new SFMLCursesWindow(m_window, sf::Vector2i(1,1)));
+	}
+
+}
+
 void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift)
 {
 	switch(key)
 	{
+	case sf::Keyboard::S:
+		saveAPF("test");
+		break;
+	case sf::Keyboard::L:
+		{
+		std::unique_ptr<SFMLCursesWindow> loadedWindow(loadAPF("test"));
+		loadedWindow->setPosition(100.0f,100.0f);
+		addGUIElement(std::move(loadedWindow));
+		}
+		break;
 	case sf::Keyboard::Escape:
 		m_messages.push_back(new SFMLStateMessage_Close());
 		break;

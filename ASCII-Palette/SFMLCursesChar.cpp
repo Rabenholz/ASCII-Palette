@@ -50,7 +50,7 @@ void SFMLCursesChar::setBackgroundColor(const sf::Color& color)
 {
 	m_backRect.setFillColor(color);
 }
-void SFMLCursesChar::setCharacter(char character)
+void SFMLCursesChar::setCharacter(std::string character)
 {
 	m_character = character;
 	sf::Color charColor = m_charSprite.getColor();
@@ -68,4 +68,32 @@ const sf::Color& SFMLCursesChar::getBackgroundColor() const
 std::string SFMLCursesChar::getCharacter() const
 {
 	return m_character;
+}
+
+std::ostream& operator<<(std::ostream& os, const SFMLCursesChar& cursesChar)
+{
+	//character char r-g-b-a  back r-g-b-a \n
+	sf::Color charColor(cursesChar.getCharColor());
+	sf::Color backgroundColor(cursesChar.getBackgroundColor());
+	os<<cursesChar.m_character<<" ";
+	os<<charColor.r<<" "<<charColor.g<<" "<<charColor.b<<" "<<charColor.a<<" ";
+	os<<backgroundColor.r<<" "<<backgroundColor.g<<" "<<backgroundColor.b<<" "<<backgroundColor.a<<"\n";
+	return os;
+}
+
+std::istream& operator>>(std::istream& is, SFMLCursesChar& cursesChar)
+{
+	if(is.good())
+	{
+		std::string character;
+		sf::Color charColor;
+		sf::Color backgroundColor;
+		is>>character;
+		is>>charColor.r>>charColor.g>>charColor.b>>charColor.a;
+		is>>backgroundColor.r>>backgroundColor.g>>backgroundColor.b>>backgroundColor.a;
+		cursesChar.setCharacter(character);
+		cursesChar.setCharColor(charColor);
+		cursesChar.setBackgroundColor(backgroundColor);
+	}
+	return is;
 }
