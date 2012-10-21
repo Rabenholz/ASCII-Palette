@@ -71,18 +71,7 @@ const SFMLCursesChar& SFMLCursesWindow::getTile(const sf::Vector2i& lTilePos) co
 }
 
 void SFMLCursesWindow::setCursesSize(const sf::Vector2i& lCursesSize)
-{
-	/*
-	m_tiles.clear();
-	for(int i = 0; i < lCursesSize.x; i++)
-	{
-		m_tiles.push_back(std::vector<SFMLCursesChar*>());
-		for(int j = 0; j<lCursesSize.y; j++)
-		{
-			m_tiles[i].push_back(new SFMLCursesChar(m_window, " "));
-		}
-	}
-	*/
+{	
 	m_tiles.resize(lCursesSize.x);
 	for(std::vector<std::vector<std::unique_ptr<SFMLCursesChar>>>::iterator yIt(m_tiles.begin()); yIt != m_tiles.end(); yIt++)
 	{
