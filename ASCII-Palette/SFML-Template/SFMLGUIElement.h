@@ -2,6 +2,7 @@
 #include "Functor.h"
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <functional>
 
 class SFMLGUIElement
 	:public sf::Drawable, public sf::Transformable
@@ -47,7 +48,7 @@ protected:
 	bool m_leftPressed;
 	bool m_rightPressed;
 	bool m_middlePressed;
-	const sf::Window& m_window;
+	std::reference_wrapper<const sf::Window> m_window;
 
 	std::shared_ptr<TFunctorBase> m_MouseLeftPressedfunc;
 	std::shared_ptr<TFunctorBase> m_MouseLeftReleasedfunc;
