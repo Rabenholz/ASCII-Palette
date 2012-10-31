@@ -27,7 +27,7 @@ public:
 
 protected:
 	sf::RectangleShape m_rectangle;
-	std::vector<std::vector<std::unique_ptr<SFMLCursesChar>>> m_tiles; //[lines, columns]
+	std::vector<std::vector<SFMLCursesChar>> m_tiles; //[lines, columns]
 	sf::Vector2i m_cursesSize;
 };
 
