@@ -30,9 +30,14 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	cursesWindow->setTile(SFMLCursesChar(m_window, "a", sf::Color::Red, sf::Color::Cyan), sf::Vector2i(2,6));
 	cursesWindow->setPosition(400,200);
 
+	std::unique_ptr<DrawingWindow> drawingWindow(new DrawingWindow(m_window, sf::Vector2i(10,10)));
+	m_drawingWindow = drawingWindow.get();
+	drawingWindow->setPosition(20.0f,20.0f);
+
 	addGUIElement(std::move(colorPicker));
 	addDrawable(std::move(colorSelected));
 	addGUIElement(std::move(cursesWindow));
+	addGUIElement(std::move(drawingWindow));
 }
 void GameState_DrawingState::OnUpdate(void)
 {
@@ -87,6 +92,21 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 {
 	switch(key)
 	{
+	case::sf::Keyboard::Up:
+		m_drawingWindow->moveCursorUp();
+		break;
+	case::sf::Keyboard::Down:
+		m_drawingWindow->moveCursorDown();
+		break;
+	case::sf::Keyboard::Left:
+		m_drawingWindow->moveCursorLeft();
+		break;
+	case::sf::Keyboard::Right:
+		m_drawingWindow->moveCursorRight();
+		break;
+	case::sf::Keyboard::A:
+		m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window,"b",sf::Color::Red, sf::Color::White));
+		break;
 	case sf::Keyboard::S:
 		saveAPF("test");
 		break;

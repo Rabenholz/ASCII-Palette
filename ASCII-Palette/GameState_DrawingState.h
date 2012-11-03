@@ -3,6 +3,7 @@
 #include "SFMLColorPalette.h"
 #include "SFMLCursesChar.h"
 #include "SFMLCursesWindow.h"
+#include "DrawingWindow.h"
 #include <fstream>
 class GameState_DrawingState : public GameStateBase
 {
@@ -26,5 +27,6 @@ private:
 	SFMLColorPalette* m_colorPicker;
 	sf::RectangleShape* m_rectangle;
 	SFMLCursesWindow* m_drawingBoard;
+	DrawingWindow* m_drawingWindow;
 };
 
