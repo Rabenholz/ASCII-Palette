@@ -23,8 +23,12 @@ public:
 
 	//SFMLEvent Overrides
 	virtual void OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift);
+	virtual void OnTextEntered(sf::Uint32 text);
+
 private:
 	SFMLColorPalette* m_colorPicker;
+	sf::Color m_primaryColor;
+	sf::Color m_secondaryColor;
 	sf::RectangleShape* m_rectangle;
 	SFMLCursesWindow* m_drawingBoard;
 	DrawingWindow* m_drawingWindow;

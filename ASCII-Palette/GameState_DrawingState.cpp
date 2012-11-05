@@ -41,10 +41,11 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 }
 void GameState_DrawingState::OnUpdate(void)
 {
+	m_primaryColor = m_colorPicker->getSelectedColor();
 }
 void GameState_DrawingState::OnRender(sf::RenderTarget& target)
 {
-	m_rectangle->setFillColor(m_colorPicker->getSelectedColor());
+	m_rectangle->setFillColor(m_primaryColor);
 	GameStateBase::drawDisplayList(target);
 }
 void GameState_DrawingState::OnCleanup(void)
@@ -92,20 +93,17 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 {
 	switch(key)
 	{
-	case::sf::Keyboard::Up:
+	case sf::Keyboard::Up:
 		m_drawingWindow->moveCursorUp();
 		break;
-	case::sf::Keyboard::Down:
+	case sf::Keyboard::Down:
 		m_drawingWindow->moveCursorDown();
 		break;
-	case::sf::Keyboard::Left:
+	case sf::Keyboard::Left:
 		m_drawingWindow->moveCursorLeft();
 		break;
-	case::sf::Keyboard::Right:
+	case sf::Keyboard::Right:
 		m_drawingWindow->moveCursorRight();
-		break;
-	case::sf::Keyboard::A:
-		m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window,"b",sf::Color::Red, sf::Color::White));
 		break;
 	case sf::Keyboard::S:
 		saveAPF("test");
@@ -121,4 +119,9 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 		m_messages.push_back(new SFMLStateMessage_Close());
 		break;
 	}
+}
+
+void GameState_DrawingState::OnTextEntered(sf::Uint32 text)
+{
+	m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window,std::string(sf::String(text)),m_primaryColor, m_secondaryColor));
 }
