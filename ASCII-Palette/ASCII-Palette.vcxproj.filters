@@ -87,8 +87,11 @@
     <ClInclude Include="SFMLCursesWindow.h">
       <Filter>SFMLGUIElement</Filter>
     </ClInclude>
+    <ClInclude Include="ColorSelector.h">
+      <Filter>SFMLGUIElement</Filter>
+    </ClInclude>
     <ClInclude Include="DrawingWindow.h">
-      <Filter>SFML-Template\Header Files</Filter>
+      <Filter>SFMLGUIElement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -158,8 +161,11 @@
     <ClCompile Include="SFMLCursesWindow.cpp">
       <Filter>SFMLGUIElement</Filter>
     </ClCompile>
+    <ClCompile Include="ColorSelector.cpp">
+      <Filter>SFMLGUIElement</Filter>
+    </ClCompile>
     <ClCompile Include="DrawingWindow.cpp">
-      <Filter>SFML-Template\Source Files</Filter>
+      <Filter>SFMLGUIElement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

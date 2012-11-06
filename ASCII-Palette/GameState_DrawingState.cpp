@@ -17,6 +17,7 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	std::unique_ptr<SFMLColorPalette> colorPicker(new SFMLColorPalette(m_window, ImageManager::getInstance().getImage("ColorWheel"), 
 		TextureManager::getInstance().getTexture("ColorWheel")));
 	m_colorPicker = colorPicker.get();
+	colorPicker->setMouseLeftClickedFunction(std::make_shared<TFunctor<GameState_DrawingState>>(this, &GameState_DrawingState::updateColorSelector));
 	colorPicker->setPosition(0.0f, 300.0f);
 	std::unique_ptr<sf::RectangleShape> colorSelected(new sf::RectangleShape(sf::Vector2f(20.0f, 20.0f)));
 	m_rectangle = colorSelected.get();
@@ -34,18 +35,21 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	m_drawingWindow = drawingWindow.get();
 	drawingWindow->setPosition(20.0f,20.0f);
 
+	std::unique_ptr<ColorSelector> colorSelector(new ColorSelector(m_window));
+	m_colorSelector = colorSelector.get();
+	colorSelector->setPosition(400.0f, 400.0f);
+
 	addGUIElement(std::move(colorPicker));
 	addDrawable(std::move(colorSelected));
 	addGUIElement(std::move(cursesWindow));
 	addGUIElement(std::move(drawingWindow));
+	addGUIElement(std::move(colorSelector));
 }
 void GameState_DrawingState::OnUpdate(void)
 {
-	m_primaryColor = m_colorPicker->getSelectedColor();
 }
 void GameState_DrawingState::OnRender(sf::RenderTarget& target)
 {
-	m_rectangle->setFillColor(m_primaryColor);
 	GameStateBase::drawDisplayList(target);
 }
 void GameState_DrawingState::OnCleanup(void)
@@ -89,6 +93,12 @@ std::unique_ptr<SFMLCursesWindow> GameState_DrawingState::loadAPF(const std::str
 
 }
 
+void GameState_DrawingState::updateColorSelector()
+{
+	m_colorPicker->onLeftClick();
+	m_colorSelector->setPrimaryColor(m_colorPicker->getSelectedColor());
+}
+
 void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift)
 {
 	switch(key)
@@ -123,5 +133,6 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 
 void GameState_DrawingState::OnTextEntered(sf::Uint32 text)
 {
-	m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window,std::string(sf::String(text)),m_primaryColor, m_secondaryColor));
+	m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window,std::string(sf::String(text)),
+		m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()));
 }

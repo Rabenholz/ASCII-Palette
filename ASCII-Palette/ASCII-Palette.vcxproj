@@ -79,6 +79,7 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorSelector.h" />
     <ClInclude Include="DrawingWindow.h" />
     <ClInclude Include="GameState_DrawingState.h" />
     <ClInclude Include="SFML-Template\AnimatedSprite.h" />
@@ -103,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ASCII-Palette.cpp" />
+    <ClCompile Include="ColorSelector.cpp" />
     <ClCompile Include="DrawingWindow.cpp" />
     <ClCompile Include="GameState_DrawingState.cpp" />
     <ClCompile Include="SFML-Template\AnimatedSprite.cpp" />

@@ -4,6 +4,7 @@
 #include "SFMLCursesChar.h"
 #include "SFMLCursesWindow.h"
 #include "DrawingWindow.h"
+#include "ColorSelector.h"
 #include <fstream>
 class GameState_DrawingState : public GameStateBase
 {
@@ -21,16 +22,17 @@ public:
 	void saveAPF(const std::string& fileName);
 	std::unique_ptr<SFMLCursesWindow> loadAPF(const std::string& fileName);
 
+	void updateColorSelector();
+
 	//SFMLEvent Overrides
 	virtual void OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift);
 	virtual void OnTextEntered(sf::Uint32 text);
 
 private:
 	SFMLColorPalette* m_colorPicker;
-	sf::Color m_primaryColor;
-	sf::Color m_secondaryColor;
 	sf::RectangleShape* m_rectangle;
 	SFMLCursesWindow* m_drawingBoard;
 	DrawingWindow* m_drawingWindow;
+	ColorSelector* m_colorSelector;
 };
 
