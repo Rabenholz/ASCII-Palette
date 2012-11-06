@@ -18,6 +18,8 @@ public:
 	void moveCursorLeft();
 	void moveCursorRight();
 
+	SFMLCursesWindow& getCursesWindow(); //for saving - easier this way
+
 private:
 	SFMLCursesWindow m_cursesWindow;
 	sf::Vector2i m_cursorPosition;

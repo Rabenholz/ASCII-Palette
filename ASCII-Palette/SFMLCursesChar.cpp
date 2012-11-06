@@ -75,9 +75,11 @@ std::ostream& operator<<(std::ostream& os, const SFMLCursesChar& cursesChar)
 	//character char r-g-b-a  back r-g-b-a \n
 	sf::Color charColor(cursesChar.getCharColor());
 	sf::Color backgroundColor(cursesChar.getBackgroundColor());
-	os<<cursesChar.m_character<<" ";
-	os<<charColor.r<<" "<<charColor.g<<" "<<charColor.b<<" "<<charColor.a<<" ";
-	os<<backgroundColor.r<<" "<<backgroundColor.g<<" "<<backgroundColor.b<<" "<<backgroundColor.a<<"\n";
+	os<<static_cast<unsigned int>(cursesChar.m_character.c_str()[0])<<" ";
+	os<<static_cast<unsigned int>(charColor.r)<<" "<<static_cast<unsigned int>(charColor.g)<<
+		" "<<static_cast<unsigned int>(charColor.b)<<" "<<static_cast<unsigned int>(charColor.a)<<" ";
+	os<<static_cast<unsigned int>(backgroundColor.r)<<" "<<static_cast<unsigned int>(backgroundColor.g)<<
+		" "<<static_cast<unsigned int>(backgroundColor.b)<<" "<<static_cast<unsigned int>(backgroundColor.a)<<"\n";
 	return os;
 }
 
@@ -85,15 +87,15 @@ std::istream& operator>>(std::istream& is, SFMLCursesChar& cursesChar)
 {
 	if(is.good())
 	{
-		std::string character;
-		sf::Color charColor;
-		sf::Color backgroundColor;
+		std::string character = ""; //expressed as a string of an integer (ASCII Value)
+		int charR, charG, charB, charA, backR, backG, backB, backA = 0;
 		is>>character;
-		is>>charColor.r>>charColor.g>>charColor.b>>charColor.a;
-		is>>backgroundColor.r>>backgroundColor.g>>backgroundColor.b>>backgroundColor.a;
-		cursesChar.setCharacter(character);
-		cursesChar.setCharColor(charColor);
-		cursesChar.setBackgroundColor(backgroundColor);
+		is>>charR>>charG>>charB>>charA;
+		is>>backR>>backG>>backB>>backA;
+		char c[2] = {static_cast<char>(std::atoi(character.c_str())), '\0'};
+		cursesChar.setCharacter(std::string(c));
+		cursesChar.setCharColor(sf::Color(charR,charG,charB,charA));
+		cursesChar.setBackgroundColor(sf::Color(backR,backG,backB,backA));
 	}
 	return is;
 }

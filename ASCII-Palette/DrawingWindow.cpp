@@ -77,3 +77,8 @@ void DrawingWindow::moveCursorRight()
 {
 	moveCursorToPosition(sf::Vector2i(m_cursorPosition.x, m_cursorPosition.y+1));
 }
+
+SFMLCursesWindow& DrawingWindow::getCursesWindow()
+{
+	return m_cursesWindow;
+}

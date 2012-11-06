@@ -68,27 +68,24 @@ void GameState_DrawingState::saveAPF(const std::string& fileName)
 	std::string extFileName(fileName);
 	extFileName += ".apf";
 	std::ofstream write(extFileName, std::ios::out);
-	write<<(*m_drawingBoard);
+	write<<m_drawingWindow->getCursesWindow();
 	write.close();
 }
 
-std::unique_ptr<SFMLCursesWindow> GameState_DrawingState::loadAPF(const std::string& fileName)
+void GameState_DrawingState::loadAPF(const std::string& fileName)
 {
 	std::string extFileName(fileName);
 	extFileName += ".apf";
 	std::ifstream read(extFileName, std::ios::in);
 	if(read.is_open())
 	{
-		std::unique_ptr<SFMLCursesWindow> cursesWindow(new SFMLCursesWindow(m_window, sf::Vector2i(1,1)));
-		read>>(*cursesWindow);
+		read>>m_drawingWindow->getCursesWindow();
 		read.close();
-		return cursesWindow;
 	}
 	else
 	{
 		//throw an exception here instead
 		printf("FAILED TO OPEN FILE %s\n", extFileName.c_str());
-		return std::unique_ptr<SFMLCursesWindow>(new SFMLCursesWindow(m_window, sf::Vector2i(1,1)));
 	}
 
 }
@@ -119,11 +116,7 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 		saveAPF("test");
 		break;
 	case sf::Keyboard::L:
-		{
-		std::unique_ptr<SFMLCursesWindow> loadedWindow(loadAPF("test"));
-		loadedWindow->setPosition(100.0f,100.0f);
-		addGUIElement(std::move(loadedWindow));
-		}
+		loadAPF("test");
 		break;
 	case sf::Keyboard::Escape:
 		m_messages.push_back(new SFMLStateMessage_Close());

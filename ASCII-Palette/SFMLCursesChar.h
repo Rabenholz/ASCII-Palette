@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML-Template/SFMLGUIElement.h"
 #include "SFML-Template/SpriteManager.h"
+#include <sstream>
 class SFMLCursesChar : public SFMLGUIElement
 {
 public:

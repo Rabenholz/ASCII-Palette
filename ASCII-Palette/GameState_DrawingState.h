@@ -20,7 +20,7 @@ public:
 	virtual void OnResume(void);
 
 	void saveAPF(const std::string& fileName);
-	std::unique_ptr<SFMLCursesWindow> loadAPF(const std::string& fileName);
+	void loadAPF(const std::string& fileName);
 
 	void updateColorSelector();
 
