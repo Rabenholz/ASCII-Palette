@@ -4,13 +4,13 @@
 
 ColorSelector::ColorSelector(const sf::Window& window)
 	:SFMLGUIElement(window),
-	m_primaryRect(sf::Vector2f(80.0f, 80.0f)), m_secondaryRect(sf::Vector2f(80.0f, 80.0f)),
-	m_bounds(sf::Vector2f(120.0f, 120.0f))
+	m_primaryRect(sf::Vector2f(40.0f, 40.0f)), m_secondaryRect(sf::Vector2f(40.0f, 40.0f)),
+	m_bounds(sf::Vector2f(60.0f, 60.0f))
 {
 	m_primaryRect.setOutlineThickness(3.0f);
 	m_primaryRect.setOutlineColor(sf::Color(130,130,130,255));
 	m_primaryRect.setFillColor(sf::Color::White);
-	m_secondaryRect.setPosition(40.0f, 40.0f);
+	m_secondaryRect.setPosition(20.0f, 20.0f);
 	m_secondaryRect.setOutlineThickness(3.0f);
 	m_secondaryRect.setOutlineColor(sf::Color(130,130,130,255));
 	m_secondaryRect.setFillColor(sf::Color::Black);
