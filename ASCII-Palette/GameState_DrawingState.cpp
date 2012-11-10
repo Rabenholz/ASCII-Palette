@@ -3,7 +3,12 @@
 
 
 GameState_DrawingState::GameState_DrawingState(const sf::Window& window)
-	:GameStateBase(window)
+	:GameStateBase(window),
+	m_colorPicker(nullptr),
+	m_rectangle(nullptr),
+	m_drawingBoard(nullptr),
+	m_drawingWindow(nullptr),
+	m_colorSelector(nullptr)
 {
 }
 
@@ -54,6 +59,11 @@ void GameState_DrawingState::OnRender(sf::RenderTarget& target)
 }
 void GameState_DrawingState::OnCleanup(void)
 {
+	m_colorPicker = nullptr;
+	m_rectangle = nullptr;
+	m_drawingBoard = nullptr;
+	m_drawingWindow = nullptr;
+	m_colorSelector = nullptr;
 	GameStateBase::Cleanup();
 }
 void GameState_DrawingState::OnSuspend(void)
