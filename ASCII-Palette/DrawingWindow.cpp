@@ -17,6 +17,8 @@ DrawingWindow::DrawingWindow(const sf::Window& window, const sf::Vector2i& lCurs
 	m_cursesWindow.clearTiles(".",sf::Color::White, sf::Color::Black);
 	m_cursorSprite.setFramesPerSecond(1);
 	m_cursorSprite.Play();
+
+	addMouseLeftClickedFunction(std::make_shared<TFunctor<DrawingWindow>>(this,&DrawingWindow::onLeftClick));
 }
 
 
@@ -81,4 +83,10 @@ void DrawingWindow::moveCursorRight()
 SFMLCursesWindow& DrawingWindow::getCursesWindow()
 {
 	return m_cursesWindow;
+}
+
+void DrawingWindow::onLeftClick()
+{
+	sf::Vector2i mousePosition = getLocalPoint(sf::Mouse::getPosition(m_window));
+	moveCursorToPosition(sf::Vector2i(mousePosition.y/12,mousePosition.x/8));
 }

@@ -20,6 +20,8 @@ public:
 
 	SFMLCursesWindow& getCursesWindow(); //for saving - easier this way
 
+	void onLeftClick();
+
 private:
 	SFMLCursesWindow m_cursesWindow;
 	sf::Vector2i m_cursorPosition;
