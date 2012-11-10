@@ -33,16 +33,30 @@ public:
 	void OnGlobalMouseRightReleased();
 	void OnGlobalMouseMiddleReleased();
 
-	void setMouseLeftPressedFunction(std::shared_ptr<TFunctorBase> func) {m_MouseLeftPressedfunc = func;}
-	void setMouseLeftReleasedFunction(std::shared_ptr<TFunctorBase> func) {m_MouseLeftReleasedfunc = func;}
-	void setMouseRightPressedFunction(std::shared_ptr<TFunctorBase> func) {m_MouseRightPressedfunc = func;}
-	void setMouseRightReleasedFunction(std::shared_ptr<TFunctorBase> func) {m_MouseRightReleasedfunc = func;}
-	void setMouseMiddlePressedFunction(std::shared_ptr<TFunctorBase> func) {m_MouseMiddlePressedfunc = func;}
-	void setMouseMiddleReleasedFunction(std::shared_ptr<TFunctorBase> func) {m_MouseMiddleReleasedfunc = func;}
-	void setMouseLeftClickedFunction(std::shared_ptr<TFunctorBase> func) {m_MouseLeftClickedfunc = func;}
-	void setMouseRightClickedFunction(std::shared_ptr<TFunctorBase> func) {m_MouseRightClickedfunc = func;}
-	void setMouseMiddleClickedFunction(std::shared_ptr<TFunctorBase> func) {m_MouseMiddleClickedfunc = func;}
-	void setMouseRolloverFunction(std::shared_ptr<TFunctorBase> func) {m_MouseRolloverfunc = func;}
+	void addMouseLeftPressedFunction(std::shared_ptr<TFunctorBase> func);
+	void addMouseLeftReleasedFunction(std::shared_ptr<TFunctorBase> func);
+	void addMouseRightPressedFunction(std::shared_ptr<TFunctorBase> func);
+	void addMouseRightReleasedFunction(std::shared_ptr<TFunctorBase> func);
+	void addMouseMiddlePressedFunction(std::shared_ptr<TFunctorBase> func);
+	void addMouseMiddleReleasedFunction(std::shared_ptr<TFunctorBase> func);
+	void addMouseLeftClickedFunction(std::shared_ptr<TFunctorBase> func);
+	void addMouseRightClickedFunction(std::shared_ptr<TFunctorBase> func);
+	void addMouseMiddleClickedFunction(std::shared_ptr<TFunctorBase> func);
+	void addMouseRolloverFunction(std::shared_ptr<TFunctorBase> func);
+
+	void removeMouseLeftPressedFunction(TFunctorBase& func);
+	void removeMouseLeftReleasedFunction(TFunctorBase& func);
+	void removeMouseRightPressedFunction(TFunctorBase& func);
+	void removeMouseRightReleasedFunction(TFunctorBase& func);
+	void removeMouseMiddlePressedFunction(TFunctorBase& func);
+	void removeMouseMiddleReleasedFunction(TFunctorBase& func);
+	void removeMouseLeftClickedFunction(TFunctorBase& func);
+	void removeMouseRightClickedFunction(TFunctorBase& func);
+	void removeMouseMiddleClickedFunction(TFunctorBase& func);
+	void removeMouseRolloverFunction(TFunctorBase& func);
+
+	std::vector<std::shared_ptr<TFunctorBase>>::iterator getFunctionVectorIterator(
+		std::vector<std::shared_ptr<TFunctorBase>>& vec, TFunctorBase& func);
 	
 protected:
 	bool m_leftPressed;
@@ -50,15 +64,15 @@ protected:
 	bool m_middlePressed;
 	std::reference_wrapper<const sf::Window> m_window;
 
-	std::shared_ptr<TFunctorBase> m_MouseLeftPressedfunc;
-	std::shared_ptr<TFunctorBase> m_MouseLeftReleasedfunc;
-	std::shared_ptr<TFunctorBase> m_MouseRightPressedfunc;
-	std::shared_ptr<TFunctorBase> m_MouseRightReleasedfunc;
-	std::shared_ptr<TFunctorBase> m_MouseMiddlePressedfunc;
-	std::shared_ptr<TFunctorBase> m_MouseMiddleReleasedfunc;
-	std::shared_ptr<TFunctorBase> m_MouseLeftClickedfunc;
-	std::shared_ptr<TFunctorBase> m_MouseRightClickedfunc;
-	std::shared_ptr<TFunctorBase> m_MouseMiddleClickedfunc;
-	std::shared_ptr<TFunctorBase> m_MouseRolloverfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseLeftPressedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseLeftReleasedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseRightPressedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseRightReleasedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseMiddlePressedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseMiddleReleasedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseLeftClickedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseRightClickedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseMiddleClickedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_MouseRolloverfunc;
 };
 

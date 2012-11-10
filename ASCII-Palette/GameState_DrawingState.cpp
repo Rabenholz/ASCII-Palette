@@ -17,7 +17,7 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	std::unique_ptr<SFMLColorPalette> colorPicker(new SFMLColorPalette(m_window, ImageManager::getInstance().getImage("ColorWheel"), 
 		TextureManager::getInstance().getTexture("ColorWheel")));
 	m_colorPicker = colorPicker.get();
-	colorPicker->setMouseLeftClickedFunction(std::make_shared<TFunctor<GameState_DrawingState>>(this, &GameState_DrawingState::updateColorSelector));
+	colorPicker->addMouseLeftClickedFunction(std::make_shared<TFunctor<GameState_DrawingState>>(this, &GameState_DrawingState::updateColorSelector));
 	colorPicker->setPosition(0.0f, 300.0f);
 	std::unique_ptr<sf::RectangleShape> colorSelected(new sf::RectangleShape(sf::Vector2f(20.0f, 20.0f)));
 	m_rectangle = colorSelected.get();
@@ -92,7 +92,6 @@ void GameState_DrawingState::loadAPF(const std::string& fileName)
 
 void GameState_DrawingState::updateColorSelector()
 {
-	m_colorPicker->onLeftClick();
 	m_colorSelector->setPrimaryColor(m_colorPicker->getSelectedColor());
 }
 

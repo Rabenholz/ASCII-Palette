@@ -15,7 +15,7 @@ ColorSelector::ColorSelector(const sf::Window& window)
 	m_secondaryRect.setOutlineColor(sf::Color(130,130,130,255));
 	m_secondaryRect.setFillColor(sf::Color::Black);
 
-	setMouseLeftClickedFunction(std::make_shared<TFunctor<ColorSelector>>(this, &ColorSelector::swapColors));
+	addMouseLeftClickedFunction(std::make_shared<TFunctor<ColorSelector>>(this, &ColorSelector::swapColors));
 }
 
 

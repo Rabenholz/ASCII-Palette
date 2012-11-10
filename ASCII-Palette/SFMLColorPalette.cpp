@@ -38,8 +38,8 @@ SFMLColorPalette::SFMLColorPalette(const sf::Window& window, const sf::Image& co
 	m_brightnessSlider.setFillColor(sf::Color(static_cast<sf::Uint8>((1.0f-m_brightness)*255),
 		static_cast<sf::Uint8>((1.0f-m_brightness)*255),static_cast<sf::Uint8>((1.0f-m_brightness)*255), 255));
 
-	setMouseRolloverFunction(std::make_shared<TFunctor<SFMLColorPalette>>(this, &SFMLColorPalette::updateColorMagnify));
-	setMouseLeftClickedFunction(std::make_shared<TFunctor<SFMLColorPalette>>(this, &SFMLColorPalette::onLeftClick));
+	addMouseRolloverFunction(std::make_shared<TFunctor<SFMLColorPalette>>(this, &SFMLColorPalette::updateColorMagnify));
+	addMouseLeftClickedFunction(std::make_shared<TFunctor<SFMLColorPalette>>(this, &SFMLColorPalette::onLeftClick));
 }
 
 
