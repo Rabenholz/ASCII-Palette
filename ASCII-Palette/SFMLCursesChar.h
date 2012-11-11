@@ -26,7 +26,7 @@ public:
 
 protected:
 	std::string m_character;
-	sf::RectangleShape m_backRect;
+	sf::Sprite m_backRect;
 	sf::Sprite m_charSprite;
 };
 

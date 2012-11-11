@@ -5,10 +5,10 @@
 SFMLCursesChar::SFMLCursesChar(const sf::Window& window, std::string character)
 	:SFMLGUIElement(window),
 	 m_character(character),
-	 m_backRect(sf::Vector2f(8.0,12.0)), 
+	 m_backRect(TextureManager::getInstance().getTexture("Rectangle")), 
 	 m_charSprite(SpriteManager::getInstance().getSprite(std::string("CursesA_ASCII")+character))
 {
-	m_backRect.setFillColor(sf::Color::Black);
+	m_backRect.setColor(sf::Color::Black);
 	m_charSprite.setColor(sf::Color::White);
 }
 
@@ -16,9 +16,10 @@ SFMLCursesChar::SFMLCursesChar(const sf::Window& window, std::string character)
 SFMLCursesChar::SFMLCursesChar(const sf::Window& window, std::string character, const sf::Color& textColor, const sf::Color& backgroundColor)
 	:SFMLGUIElement(window),
 	 m_character(character),
-	 m_backRect(sf::Vector2f(8.0,12.0)), m_charSprite(SpriteManager::getInstance().getSprite(std::string("CursesA_ASCII")+character))
+	 m_backRect(TextureManager::getInstance().getTexture("Rectangle")),
+	 m_charSprite(SpriteManager::getInstance().getSprite(std::string("CursesA_ASCII")+character))
 {
-	m_backRect.setFillColor(backgroundColor);
+	m_backRect.setColor(backgroundColor);
 	m_charSprite.setColor(textColor);
 }
 
@@ -48,7 +49,7 @@ void SFMLCursesChar::setCharColor(const sf::Color& color)
 }
 void SFMLCursesChar::setBackgroundColor(const sf::Color& color)
 {
-	m_backRect.setFillColor(color);
+	m_backRect.setColor(color);
 }
 void SFMLCursesChar::setCharacter(std::string character)
 {
@@ -63,7 +64,7 @@ const sf::Color& SFMLCursesChar::getCharColor() const
 }
 const sf::Color& SFMLCursesChar::getBackgroundColor() const
 {
-	return m_backRect.getFillColor();
+	return m_backRect.getColor();
 }
 std::string SFMLCursesChar::getCharacter() const
 {

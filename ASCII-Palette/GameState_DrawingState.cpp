@@ -24,7 +24,7 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	colorPicker->setPosition(m_window.getSize().x - colorPicker->getLocalBounds().width,
 		m_window.getSize().y - colorPicker->getLocalBounds().height);
 
-	std::unique_ptr<DrawingWindow> drawingWindow(new DrawingWindow(m_window, sf::Vector2i(20,30)));
+	std::unique_ptr<DrawingWindow> drawingWindow(new DrawingWindow(m_window, sf::Vector2i(25,80)));
 	m_drawingWindow = drawingWindow.get();
 	drawingWindow->setPosition(20.0f,20.0f);
 
