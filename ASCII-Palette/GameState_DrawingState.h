@@ -30,8 +30,6 @@ public:
 
 private:
 	SFMLColorPalette* m_colorPicker;
-	sf::RectangleShape* m_rectangle;
-	SFMLCursesWindow* m_drawingBoard;
 	DrawingWindow* m_drawingWindow;
 	ColorSelector* m_colorSelector;
 };

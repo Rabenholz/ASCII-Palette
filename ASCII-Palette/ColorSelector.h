@@ -11,6 +11,7 @@ public:
 	virtual sf::FloatRect getGlobalBounds(void) const;
 
 	void swapColors();
+	void resetColors();
 
 	void setPrimaryColor(const sf::Color& color);
 	void setSecondaryColor(const sf::Color& color);

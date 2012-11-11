@@ -5,8 +5,6 @@
 GameState_DrawingState::GameState_DrawingState(const sf::Window& window)
 	:GameStateBase(window),
 	m_colorPicker(nullptr),
-	m_rectangle(nullptr),
-	m_drawingBoard(nullptr),
 	m_drawingWindow(nullptr),
 	m_colorSelector(nullptr)
 {
@@ -23,30 +21,18 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 		TextureManager::getInstance().getTexture("ColorWheel")));
 	m_colorPicker = colorPicker.get();
 	colorPicker->addMouseLeftClickedFunction(std::make_shared<TFunctor<GameState_DrawingState>>(this, &GameState_DrawingState::updateColorSelector));
-	colorPicker->setPosition(0.0f, 300.0f);
-	std::unique_ptr<sf::RectangleShape> colorSelected(new sf::RectangleShape(sf::Vector2f(20.0f, 20.0f)));
-	m_rectangle = colorSelected.get();
-	colorSelected->setPosition(150.0f, 150.0f);
-	colorSelected->setOutlineThickness(2.0f);
-	colorSelected->setOutlineColor(sf::Color::White);
-	
-	std::unique_ptr<SFMLCursesWindow> cursesWindow(new SFMLCursesWindow(m_window, sf::Vector2i(4,10)));
-	m_drawingBoard = cursesWindow.get();
-	cursesWindow->clearTiles("s", sf::Color::Blue, sf::Color::Green);
-	cursesWindow->setTile(SFMLCursesChar(m_window, "a", sf::Color::Red, sf::Color::Cyan), sf::Vector2i(2,6));
-	cursesWindow->setPosition(400,200);
+	colorPicker->setPosition(m_window.getSize().x - colorPicker->getLocalBounds().width,
+		m_window.getSize().y - colorPicker->getLocalBounds().height);
 
-	std::unique_ptr<DrawingWindow> drawingWindow(new DrawingWindow(m_window, sf::Vector2i(10,10)));
+	std::unique_ptr<DrawingWindow> drawingWindow(new DrawingWindow(m_window, sf::Vector2i(20,30)));
 	m_drawingWindow = drawingWindow.get();
 	drawingWindow->setPosition(20.0f,20.0f);
 
 	std::unique_ptr<ColorSelector> colorSelector(new ColorSelector(m_window));
 	m_colorSelector = colorSelector.get();
-	colorSelector->setPosition(400.0f, 400.0f);
+	colorSelector->setPosition(m_window.getSize().x - colorSelector->getLocalBounds().width-50.0f, 200.0f);
 
 	addGUIElement(std::move(colorPicker));
-	addDrawable(std::move(colorSelected));
-	addGUIElement(std::move(cursesWindow));
 	addGUIElement(std::move(drawingWindow));
 	addGUIElement(std::move(colorSelector));
 }
@@ -60,8 +46,6 @@ void GameState_DrawingState::OnRender(sf::RenderTarget& target)
 void GameState_DrawingState::OnCleanup(void)
 {
 	m_colorPicker = nullptr;
-	m_rectangle = nullptr;
-	m_drawingBoard = nullptr;
 	m_drawingWindow = nullptr;
 	m_colorSelector = nullptr;
 	GameStateBase::Cleanup();

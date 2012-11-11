@@ -5,6 +5,7 @@
 DrawingWindow::DrawingWindow(const sf::Window& window, const sf::Vector2i& lCursesSize)
 	:SFMLGUIElement(window),
 	m_cursesWindow(window, lCursesSize),
+	m_outline(sf::Vector2f(m_cursesWindow.getLocalBounds().width,m_cursesWindow.getLocalBounds().height)),
 	m_cursorPosition(0,0),
 	m_cursorSprite()
 {
@@ -14,9 +15,12 @@ DrawingWindow::DrawingWindow(const sf::Window& window, const sf::Vector2i& lCurs
 	sf::Sprite blinkSprite(SpriteManager::getInstance().getSprite("CursesA_ASCII "));
 	blinkSprite.setColor(sf::Color::Transparent);
 	m_cursorSprite.pushFrame(blinkSprite);
-	m_cursesWindow.clearTiles(".",sf::Color::White, sf::Color::Black);
+	m_cursesWindow.clearTiles(" ",sf::Color::White, sf::Color::Black);
 	m_cursorSprite.setFramesPerSecond(1);
 	m_cursorSprite.Play();
+
+	m_outline.setOutlineColor(sf::Color::White);
+	m_outline.setOutlineThickness(2.0f);
 
 	addMouseLeftClickedFunction(std::make_shared<TFunctor<DrawingWindow>>(this,&DrawingWindow::onLeftClick));
 }
@@ -30,6 +34,7 @@ DrawingWindow::~DrawingWindow(void)
 void DrawingWindow::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
+	target.draw(m_outline, states);
 	target.draw(m_cursesWindow, states);
 	target.draw(m_cursorSprite, states);
 	

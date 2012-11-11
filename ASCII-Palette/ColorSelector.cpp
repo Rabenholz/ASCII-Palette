@@ -16,6 +16,7 @@ ColorSelector::ColorSelector(const sf::Window& window)
 	m_secondaryRect.setFillColor(sf::Color::Black);
 
 	addMouseLeftClickedFunction(std::make_shared<TFunctor<ColorSelector>>(this, &ColorSelector::swapColors));
+	addMouseRightClickedFunction(std::make_shared<TFunctor<ColorSelector>>(this, &ColorSelector::resetColors));
 }
 
 
@@ -44,6 +45,12 @@ void ColorSelector::swapColors()
 	sf::Color primaryColor(getPrimaryColor());
 	setPrimaryColor(getSecondaryColor());
 	setSecondaryColor(primaryColor);
+}
+
+void ColorSelector::resetColors()
+{
+	setPrimaryColor(sf::Color::White);
+	setSecondaryColor(sf::Color::Black);
 }
 
 void ColorSelector::setPrimaryColor(const sf::Color& color)
