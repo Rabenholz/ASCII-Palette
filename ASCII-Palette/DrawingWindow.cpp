@@ -126,6 +126,9 @@ void DrawingWindow::updateCursorSprite()
 	backColor.r = 255 - backColor.r; 
 	backColor.g = 255 - backColor.g;
 	backColor.b = 255 - backColor.b;
+	sf::Sprite underscoreSprite = m_cursorSprite.getFrameSprite(0);
+	underscoreSprite.setColor(backColor);
+	m_cursorSprite.replaceFrame(underscoreSprite, 0);
 	backSprite.setColor(backColor);
 	m_cursorBackRect.replaceFrame(backSprite, 1);
 	
