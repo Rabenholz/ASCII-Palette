@@ -71,6 +71,15 @@ std::string SFMLCursesChar::getCharacter() const
 	return m_character;
 }
 
+const sf::Sprite& SFMLCursesChar::getCharSprite() const
+{
+	return m_charSprite;
+}
+const sf::Sprite& SFMLCursesChar::getBackRect() const
+{
+	return m_backRect;
+}
+
 std::ostream& operator<<(std::ostream& os, const SFMLCursesChar& cursesChar)
 {
 	//character char r-g-b-a  back r-g-b-a \n

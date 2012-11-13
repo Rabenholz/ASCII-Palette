@@ -23,9 +23,12 @@ public:
 	void onLeftClick();
 
 private:
+	void updateCursorSprite();
+
 	SFMLCursesWindow m_cursesWindow;
 	sf::Vector2i m_cursorPosition;
 	AnimatedSprite m_cursorSprite;
+	AnimatedSprite m_cursorBackRect;
 	sf::RectangleShape m_outline;
 
 };

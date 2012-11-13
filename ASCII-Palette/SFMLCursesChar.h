@@ -21,6 +21,9 @@ public:
 	const sf::Color& getBackgroundColor() const;
 	std::string getCharacter() const;
 
+	const sf::Sprite& getCharSprite() const;
+	const sf::Sprite& getBackRect() const;
+
 	friend std::ostream& operator<<(std::ostream& os, const SFMLCursesChar& cursesChar);
 	friend std::istream& operator>>(std::istream& is, SFMLCursesChar& cursesChar);
 

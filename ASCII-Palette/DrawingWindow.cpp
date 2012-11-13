@@ -7,17 +7,26 @@ DrawingWindow::DrawingWindow(const sf::Window& window, const sf::Vector2i& lCurs
 	m_cursesWindow(window, lCursesSize),
 	m_outline(sf::Vector2f(m_cursesWindow.getLocalBounds().width,m_cursesWindow.getLocalBounds().height)),
 	m_cursorPosition(0,0),
-	m_cursorSprite()
-{
-	sf::Sprite cursorSprite(SpriteManager::getInstance().getSprite("CursesA_ASCII_"));
-	cursorSprite.setColor(sf::Color(sf::Uint8(200),sf::Uint8(200),sf::Uint8(200),sf::Uint8(255)));
-	m_cursorSprite.pushFrame(cursorSprite);
-	sf::Sprite blinkSprite(SpriteManager::getInstance().getSprite("CursesA_ASCII "));
-	blinkSprite.setColor(sf::Color::Transparent);
-	m_cursorSprite.pushFrame(blinkSprite);
+	m_cursorSprite(), m_cursorBackRect()
+{	
 	m_cursesWindow.clearTiles(" ",sf::Color::White, sf::Color::Black);
+
+	sf::Sprite cursorSprite(SpriteManager::getInstance().getSprite("CursesA_ASCII_"));
+	cursorSprite.setColor(sf::Color(255,255,255,255));
+	sf::Sprite blinkSprite(TextureManager::getInstance().getTexture("Rectangle"));
+	blinkSprite.setColor(sf::Color(255,255,255,255));
+
+	m_cursorSprite.pushFrame(cursorSprite);
+	m_cursorSprite.pushFrame(blinkSprite);
 	m_cursorSprite.setFramesPerSecond(1);
 	m_cursorSprite.Play();
+
+	blinkSprite.setColor(sf::Color::Transparent);
+	m_cursorBackRect.pushFrame(cursorSprite);
+	blinkSprite.setColor(sf::Color(255,255,255,255));
+	m_cursorBackRect.pushFrame(blinkSprite);
+	m_cursorBackRect.setFramesPerSecond(1);
+	m_cursorBackRect.Play();
 
 	m_outline.setOutlineColor(sf::Color::White);
 	m_outline.setOutlineThickness(2.0f);
@@ -36,6 +45,7 @@ void DrawingWindow::draw(sf::RenderTarget& target, sf::RenderStates states) cons
 	states.transform *= getTransform();
 	target.draw(m_outline, states);
 	target.draw(m_cursesWindow, states);
+	target.draw(m_cursorBackRect, states);
 	target.draw(m_cursorSprite, states);
 	
 }
@@ -51,6 +61,7 @@ sf::FloatRect DrawingWindow::getGlobalBounds(void) const
 void DrawingWindow::setCursorCharacter(const SFMLCursesChar& character)
 {
 	m_cursesWindow.setTile(character, m_cursorPosition);
+	updateCursorSprite();
 }
 void DrawingWindow::moveCursorToPosition(sf::Vector2i position)
 {
@@ -64,9 +75,13 @@ void DrawingWindow::moveCursorToPosition(sf::Vector2i position)
 		position.y = 0;
 
 	m_cursorPosition = position;
+	updateCursorSprite();
 	m_cursorSprite.setPosition(8.0f*static_cast<float>(position.y), 12.0f*static_cast<float>(position.x));
 	m_cursorSprite.Reset();
 	m_cursorSprite.Play();
+	m_cursorBackRect.setPosition(8.0f*static_cast<float>(position.y), 12.0f*static_cast<float>(position.x));
+	m_cursorBackRect.Reset();
+	m_cursorBackRect.Play();
 }
 void DrawingWindow::moveCursorUp()
 {
@@ -94,4 +109,24 @@ void DrawingWindow::onLeftClick()
 {
 	sf::Vector2i mousePosition = getLocalPoint(sf::Mouse::getPosition(m_window));
 	moveCursorToPosition(sf::Vector2i(mousePosition.y/12,mousePosition.x/8));
+}
+
+void DrawingWindow::updateCursorSprite()
+{
+	const SFMLCursesChar& character = m_cursesWindow.getTile(m_cursorPosition);
+	sf::Sprite cursorSprite = character.getCharSprite();
+	sf::Color charColor = character.getCharColor();
+	charColor.r = 255 - charColor.r; 
+	charColor.g = 255 - charColor.g;
+	charColor.b = 255 - charColor.b;
+	cursorSprite.setColor(charColor);
+	m_cursorSprite.replaceFrame(cursorSprite, 1);
+	sf::Sprite backSprite = character.getBackRect();
+	sf::Color backColor = character.getBackgroundColor();
+	backColor.r = 255 - backColor.r; 
+	backColor.g = 255 - backColor.g;
+	backColor.b = 255 - backColor.b;
+	backSprite.setColor(backColor);
+	m_cursorBackRect.replaceFrame(backSprite, 1);
+	
 }
