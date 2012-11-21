@@ -31,7 +31,8 @@ SFMLCursesChar::~SFMLCursesChar(void)
 void SFMLCursesChar::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
-	target.draw(m_backRect, states);
+	if(m_backRect.getColor() != sf::Color::Black)
+		target.draw(m_backRect, states);
 	if(m_character != " ")
 		target.draw(m_charSprite, states);
 }

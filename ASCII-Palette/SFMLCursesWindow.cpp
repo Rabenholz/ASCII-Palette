@@ -9,8 +9,7 @@ SFMLCursesWindow::SFMLCursesWindow(const sf::Window& window, const sf::Vector2i&
 	 m_cursesSize(0,0)
 {
 	setCursesSize(lCursesSize);
-	//m_rectangle.setFillColor(sf::Color::Blue);
-	m_rectangle.setFillColor(sf::Color(0,0,0,0));
+	m_rectangle.setFillColor(sf::Color::Black);
 }
 
 void SFMLCursesWindow::draw(sf::RenderTarget& target, sf::RenderStates states) const
