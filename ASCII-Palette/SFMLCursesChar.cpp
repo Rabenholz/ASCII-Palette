@@ -32,7 +32,8 @@ void SFMLCursesChar::draw(sf::RenderTarget& target, sf::RenderStates states) con
 {
 	states.transform *= getTransform();
 	target.draw(m_backRect, states);
-	target.draw(m_charSprite, states);
+	if(m_character != " ")
+		target.draw(m_charSprite, states);
 }
 sf::FloatRect SFMLCursesChar::getLocalBounds() const
 {
