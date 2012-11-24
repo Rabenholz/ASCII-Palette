@@ -8,6 +8,7 @@
 #include "AltCharsWindow.h"
 #include "GameState_LoadState.h"
 #include "GameState_SaveState.h"
+#include "SFMLCursesTextBox.h"
 #include <fstream>
 class GameState_DrawingState : public GameStateBase
 {

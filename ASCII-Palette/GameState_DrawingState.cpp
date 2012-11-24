@@ -38,10 +38,15 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	altCharsWindow->addMouseLeftClickedFunction(std::make_shared<TFunctor<GameState_DrawingState>>(this, &GameState_DrawingState::onAltCharClick));
 	altCharsWindow->setPosition(m_window.getSize().x - altCharsWindow->getLocalBounds().width-10.0f, 40.0f);
 
+	std::unique_ptr<SFMLCursesTextBox> textBox(new SFMLCursesTextBox(m_window, sf::Vector2i(10,20)));
+	textBox->setPosition(200.0f, 200.0f);
+	textBox->setText("This is an awesome sentence and no one can tell you otherwise. If they try to they are lying and deserve to be beaten.");
+
 	addGUIElement(std::move(colorPicker));
 	addGUIElement(std::move(drawingWindow));
 	addGUIElement(std::move(colorSelector));
 	addGUIElement(std::move(altCharsWindow));
+	addGUIElement(std::move(textBox));
 }
 void GameState_DrawingState::OnUpdate(void)
 {
