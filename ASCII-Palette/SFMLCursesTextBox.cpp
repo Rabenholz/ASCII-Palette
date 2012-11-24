@@ -89,7 +89,7 @@ void SFMLCursesTextBox::updateTextBox()
 
 	}
 	*/
-	clearTiles(" ", sf::Color::Black, sf::Color::Green);
+	clearTiles(" ", sf::Color::White, sf::Color::Black);
 	std::string::const_iterator lineBegin(m_text.begin());
 	std::string::const_iterator lineEnd(m_text.begin());
 	unsigned int line = 0;
@@ -109,6 +109,9 @@ void SFMLCursesTextBox::updateTextBox()
 			unsigned int col = 0;
 			unsigned int spacePadding = 0;
 			unsigned int wordCount = std::count(lineBegin, lastLineEnd, ' ') + 1;
+			unsigned int wordCountRemaining = wordCount;
+			unsigned int extraSpace = m_cursesSize.y - (lastLineEnd - lineBegin);
+			unsigned int extraSpaceRemaining = extraSpace;
 			//print with proper alignment
 			switch(m_alignment)
 			{
@@ -137,13 +140,25 @@ void SFMLCursesTextBox::updateTextBox()
 					break;
 				case Alignment::Justify:
 					col++;
-					if(spacePadding > 0 && *lineBegin == ' ')
+					if(extraSpaceRemaining > 0 && *lineBegin == ' ' && lastLineEnd != m_text.end())
 					{
-						setTile(SFMLCursesChar(m_window, " "), sf::Vector2i(line,col));
 						col++;
+						extraSpaceRemaining--;
+						if(extraSpaceRemaining >= wordCountRemaining - 1)
+						{
+							col++;
+							extraSpaceRemaining--;
+						}
+						wordCountRemaining--;
 					}
 					break;
 				}
+				//"a b"
+				//"a b c"
+				//"a b c d"
+				//"a  b  c  d  e"
+				//1. calculate whitespace on line, not including spaces
+				//2.add spaces in order - middle, left, right
 			}
 			if(lineBegin != m_text.end())
 				lineBegin++;

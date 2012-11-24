@@ -41,8 +41,8 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	std::unique_ptr<SFMLCursesTextBox> textBox(new SFMLCursesTextBox(m_window, sf::Vector2i(10,20)));
 	textBox->setPosition(200.0f, 200.0f);
 	textBox->setAlignment(SFMLCursesTextBox::Alignment::Left);
-	textBox->setText("This is an awesome sentence and no one can tell you otherwise. If theyyy try to they are lying and deserve to be beaten.");
-
+	textBox->setText(//"This is an awesome sentence and no one can tell you otherwise. If theyyy try to they are lying and deserve to be beaten.");
+		"I am typing an average sentence that contains many words, both short and long. The p90 is a world renowned gun, known for its fast fire rate.");
 	addGUIElement(std::move(colorPicker));
 	addGUIElement(std::move(drawingWindow));
 	addGUIElement(std::move(colorSelector));
