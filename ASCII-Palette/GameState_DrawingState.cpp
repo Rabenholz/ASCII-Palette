@@ -40,7 +40,8 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 
 	std::unique_ptr<SFMLCursesTextBox> textBox(new SFMLCursesTextBox(m_window, sf::Vector2i(10,20)));
 	textBox->setPosition(200.0f, 200.0f);
-	textBox->setText("This is an awesome sentence and no one can tell you otherwise. If they try to they are lying and deserve to be beaten.");
+	textBox->setAlignment(SFMLCursesTextBox::Alignment::Left);
+	textBox->setText("This is an awesome sentence and no one can tell you otherwise. If theyyy try to they are lying and deserve to be beaten.");
 
 	addGUIElement(std::move(colorPicker));
 	addGUIElement(std::move(drawingWindow));

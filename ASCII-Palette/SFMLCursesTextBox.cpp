@@ -48,6 +48,7 @@ SFMLCursesTextBox::Alignment::E SFMLCursesTextBox::getAlignment() const
 
 void SFMLCursesTextBox::updateTextBox()
 {
+	/*
 	std::string word = "";
 	int col = 0;
 	int line = 0;
@@ -87,4 +88,74 @@ void SFMLCursesTextBox::updateTextBox()
 		}
 
 	}
+	*/
+	clearTiles(" ", sf::Color::Black, sf::Color::Green);
+	std::string::const_iterator lineBegin(m_text.begin());
+	std::string::const_iterator lineEnd(m_text.begin());
+	unsigned int line = 0;
+	while(lineBegin != m_text.end())
+	{
+		std::string::const_iterator lastLineEnd(lineEnd);
+		unsigned int position = m_text.find(" ", lineEnd - m_text.begin() + 1);
+		if(position != std::string::npos)
+			lineEnd = m_text.begin() + position;
+		else
+			lineEnd = m_text.end();
+		if(lineEnd - lineBegin  > m_cursesSize.y || lineEnd == m_text.end()) //too much for this line
+		{
+			if(!(lineEnd - lineBegin > m_cursesSize.y))
+				lastLineEnd = lineEnd;
+			//backtrack, print, next line
+			unsigned int col = 0;
+			unsigned int spacePadding = 0;
+			unsigned int wordCount = std::count(lineBegin, lastLineEnd, ' ') + 1;
+			//print with proper alignment
+			switch(m_alignment)
+			{
+			case Alignment::Left:
+				col = 0;
+				break;
+			case Alignment::Right:
+				col = m_cursesSize.y - (lastLineEnd - lineBegin);
+				break;
+			case Alignment::Center:
+				col = m_cursesSize.y/2 - (lastLineEnd - lineBegin)/2;
+				break;
+			case Alignment::Justify:
+				col = 0;
+				break;
+			}
+			for(lineBegin; lineBegin != lastLineEnd; lineBegin++)
+			{
+				setTile(SFMLCursesChar(m_window, std::string("") + *lineBegin), sf::Vector2i(line,col));
+				switch(m_alignment)
+				{
+				case Alignment::Left:
+				case Alignment::Right:
+				case Alignment::Center:
+					col++;
+					break;
+				case Alignment::Justify:
+					col++;
+					if(spacePadding > 0 && *lineBegin == ' ')
+					{
+						setTile(SFMLCursesChar(m_window, " "), sf::Vector2i(line,col));
+						col++;
+					}
+					break;
+				}
+			}
+			if(lineBegin != m_text.end())
+				lineBegin++;
+			else 
+				break;
+			line++;
+			wordCount = 0;
+		}
+		if(line >= static_cast<unsigned int>(m_cursesSize.x))
+			break;
+		//"A cool string bro"
+		// 01234567890123456
+	}
+
 }
