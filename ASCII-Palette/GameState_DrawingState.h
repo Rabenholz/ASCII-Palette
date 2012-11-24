@@ -24,6 +24,7 @@ public:
 	void loadAPF(const std::string& fileName);
 
 	void updateColorSelector();
+	void onAltCharClick();
 
 	//SFMLEvent Overrides
 	virtual void OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift);

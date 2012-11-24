@@ -34,6 +34,7 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 
 	std::unique_ptr<AltCharsWindow> altCharsWindow(new AltCharsWindow(m_window));
 	m_altCharsWindow = altCharsWindow.get();
+	altCharsWindow->addMouseLeftClickedFunction(std::make_shared<TFunctor<GameState_DrawingState>>(this, &GameState_DrawingState::onAltCharClick));
 	altCharsWindow->setPosition(m_window.getSize().x - altCharsWindow->getLocalBounds().width-10.0f, 40.0f);
 
 	addGUIElement(std::move(colorPicker));
@@ -92,6 +93,12 @@ void GameState_DrawingState::loadAPF(const std::string& fileName)
 void GameState_DrawingState::updateColorSelector()
 {
 	m_colorSelector->setPrimaryColor(m_colorPicker->getSelectedColor());
+}
+
+void GameState_DrawingState::onAltCharClick()
+{
+	m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window,m_altCharsWindow->getCharAtMouse(),
+		m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()));
 }
 
 void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift)

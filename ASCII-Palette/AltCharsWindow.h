@@ -11,8 +11,9 @@ public:
 	virtual sf::FloatRect getLocalBounds(void) const;
 	virtual sf::FloatRect getGlobalBounds(void) const;
 
-	void onLeftClick();
 	void updateCharMagnify();
+
+	std::string getCharAtMouse() const;
 
 private:
 	SFMLCursesWindow m_cursesWindow;

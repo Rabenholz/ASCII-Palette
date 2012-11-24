@@ -32,7 +32,6 @@ AltCharsWindow::AltCharsWindow(const sf::Window& window)
 	m_outline.setOutlineThickness(2.0f);
 
 	m_charMagnify.setScale(4.0f, 4.0f);
-	addMouseLeftClickedFunction(std::make_shared<TFunctor<AltCharsWindow>>(this,&AltCharsWindow::onLeftClick));
 	addMouseRolloverFunction(std::make_shared<TFunctor<AltCharsWindow>>(this,&AltCharsWindow::updateCharMagnify));
 }
 
@@ -58,10 +57,6 @@ sf::FloatRect AltCharsWindow::getGlobalBounds(void) const
 	return getTransform().transformRect(m_cursesWindow.getGlobalBounds());
 }
 
-void AltCharsWindow::onLeftClick()
-{
-}
-
 void AltCharsWindow::updateCharMagnify()
 {
 	sf::Vector2f localMouseFloat(getLocalPoint(sf::Mouse::getPosition(m_window)));
@@ -70,4 +65,10 @@ void AltCharsWindow::updateCharMagnify()
 		localMouseFloat.y - m_charMagnify.getLocalBounds().height*m_charMagnify.getScale().y - 5.0f);
 
 	m_charMagnify.setCharacter(m_cursesWindow.getTile(sf::Vector2i(localMouse.y/12,localMouse.x/8)).getCharacter());
+}
+
+std::string AltCharsWindow::getCharAtMouse() const
+{
+	sf::Vector2i localMouse(getLocalPoint(sf::Mouse::getPosition(m_window)));
+	return m_cursesWindow.getTile(sf::Vector2i(localMouse.y/12,localMouse.x/8)).getCharacter();
 }
