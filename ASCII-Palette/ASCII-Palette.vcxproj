@@ -82,6 +82,9 @@
     <ClInclude Include="AltCharsWindow.h" />
     <ClInclude Include="ColorSelector.h" />
     <ClInclude Include="DrawingWindow.h" />
+    <ClInclude Include="GameState_LoadState.h" />
+    <ClInclude Include="GameState_SaveState.h" />
+    <ClInclude Include="StateInfo_CursesWindow.h" />
     <ClInclude Include="GameState_DrawingState.h" />
     <ClInclude Include="SFML-Template\AnimatedSprite.h" />
     <ClInclude Include="SFML-Template\FontManager.h" />
@@ -109,6 +112,8 @@
     <ClCompile Include="ColorSelector.cpp" />
     <ClCompile Include="DrawingWindow.cpp" />
     <ClCompile Include="GameState_DrawingState.cpp" />
+    <ClCompile Include="GameState_LoadState.cpp" />
+    <ClCompile Include="GameState_SaveState.cpp" />
     <ClCompile Include="SFML-Template\AnimatedSprite.cpp" />
     <ClCompile Include="SFML-Template\FontManager.cpp" />
     <ClCompile Include="SFML-Template\GameStateBase.cpp" />

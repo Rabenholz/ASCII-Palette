@@ -37,6 +37,10 @@ bool SFMLApp::OnInit(void)
 
 	std::unique_ptr<GameState_DrawingState> drawingState(new GameState_DrawingState(m_mainWindow));
 	registerState(std::move(drawingState), "Drawing");
+	std::unique_ptr<GameState_LoadState> loadState(new GameState_LoadState(m_mainWindow));
+	registerState(std::move(loadState), "Load");
+	std::unique_ptr<GameState_SaveState> saveState(new GameState_SaveState(m_mainWindow));
+	registerState(std::move(saveState), "Save");
 	changeState("Drawing", nullptr);
 
 	return true;

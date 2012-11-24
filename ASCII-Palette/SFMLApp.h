@@ -12,6 +12,8 @@
 #include "SFML-Template/FontManager.h"
 
 #include "GameState_DrawingState.h"
+#include "GameState_LoadState.h"
+#include "GameState_SaveState.h"
 
 class SFMLApp
 {

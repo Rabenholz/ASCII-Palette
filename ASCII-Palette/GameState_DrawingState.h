@@ -6,6 +6,8 @@
 #include "DrawingWindow.h"
 #include "ColorSelector.h"
 #include "AltCharsWindow.h"
+#include "GameState_LoadState.h"
+#include "GameState_SaveState.h"
 #include <fstream>
 class GameState_DrawingState : public GameStateBase
 {
@@ -19,9 +21,6 @@ public:
 	virtual void OnCleanup(void);
 	virtual void OnSuspend(void);
 	virtual void OnResume(void);
-
-	void saveAPF(const std::string& fileName);
-	void loadAPF(const std::string& fileName);
 
 	void updateColorSelector();
 	void onAltCharClick();

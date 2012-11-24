@@ -8,6 +8,7 @@ GameState_DrawingState::GameState_DrawingState(const sf::Window& window)
 	m_drawingWindow(nullptr),
 	m_colorSelector(nullptr)
 {
+	m_transparent = true;
 }
 
 
@@ -63,33 +64,6 @@ void GameState_DrawingState::OnResume(void)
 {
 }
 
-void GameState_DrawingState::saveAPF(const std::string& fileName)
-{
-	std::string extFileName(fileName);
-	extFileName += ".apf";
-	std::ofstream write(extFileName, std::ios::out);
-	write<<m_drawingWindow->getCursesWindow();
-	write.close();
-}
-
-void GameState_DrawingState::loadAPF(const std::string& fileName)
-{
-	std::string extFileName(fileName);
-	extFileName += ".apf";
-	std::ifstream read(extFileName, std::ios::in);
-	if(read.is_open())
-	{
-		read>>m_drawingWindow->getCursesWindow();
-		read.close();
-	}
-	else
-	{
-		//throw an exception here instead
-		printf("FAILED TO OPEN FILE %s\n", extFileName.c_str());
-	}
-
-}
-
 void GameState_DrawingState::updateColorSelector()
 {
 	m_colorSelector->setPrimaryColor(m_colorPicker->getSelectedColor());
@@ -118,10 +92,18 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 		m_drawingWindow->moveCursorRight();
 		break;
 	case sf::Keyboard::S:
-		saveAPF("test");
+		if(control)
+		{
+			m_messages.push_back(new SFMLStateMessage_PushState("Save",
+			std::unique_ptr<StateInfo_CursesWindow>(new StateInfo_CursesWindow(m_drawingWindow->getCursesWindow()))));
+		}
 		break;
 	case sf::Keyboard::L:
-		loadAPF("test");
+		if(control)
+		{
+			m_messages.push_back(new SFMLStateMessage_PushState("Load",
+			std::unique_ptr<StateInfo_CursesWindow>(new StateInfo_CursesWindow(m_drawingWindow->getCursesWindow()))));
+		}
 		break;
 	case sf::Keyboard::Escape:
 		m_messages.push_back(new SFMLStateMessage_Close());
@@ -131,6 +113,8 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 
 void GameState_DrawingState::OnTextEntered(sf::Uint32 text)
 {
+	if(text < 32)
+		return;
 	m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window,std::string(sf::String(text)),
 		m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()));
 }

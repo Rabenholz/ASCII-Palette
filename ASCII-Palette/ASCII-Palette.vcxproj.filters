@@ -94,7 +94,16 @@
       <Filter>SFMLGUIElement</Filter>
     </ClInclude>
     <ClInclude Include="AltCharsWindow.h">
+      <Filter>SFMLGUIElement</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState_SaveState.h">
       <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState_LoadState.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateInfo_CursesWindow.h">
+      <Filter>SFMLGUIElement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +180,12 @@
       <Filter>SFMLGUIElement</Filter>
     </ClCompile>
     <ClCompile Include="AltCharsWindow.cpp">
+      <Filter>SFMLGUIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_SaveState.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_LoadState.cpp">
       <Filter>SFML-Template\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
