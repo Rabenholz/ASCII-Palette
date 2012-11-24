@@ -93,6 +93,9 @@
     <ClInclude Include="DrawingWindow.h">
       <Filter>SFMLGUIElement</Filter>
     </ClInclude>
+    <ClInclude Include="AltCharsWindow.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML-Template\AnimatedSprite.cpp">
@@ -166,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="DrawingWindow.cpp">
       <Filter>SFMLGUIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="AltCharsWindow.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include "SFMLCursesWindow.h"
 #include "DrawingWindow.h"
 #include "ColorSelector.h"
+#include "AltCharsWindow.h"
 #include <fstream>
 class GameState_DrawingState : public GameStateBase
 {
@@ -32,5 +33,6 @@ private:
 	SFMLColorPalette* m_colorPicker;
 	DrawingWindow* m_drawingWindow;
 	ColorSelector* m_colorSelector;
+	AltCharsWindow* m_altCharsWindow;
 };
 

@@ -32,9 +32,14 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	m_colorSelector = colorSelector.get();
 	colorSelector->setPosition(m_window.getSize().x - colorSelector->getLocalBounds().width-50.0f, 200.0f);
 
+	std::unique_ptr<AltCharsWindow> altCharsWindow(new AltCharsWindow(m_window));
+	m_altCharsWindow = altCharsWindow.get();
+	altCharsWindow->setPosition(m_window.getSize().x - altCharsWindow->getLocalBounds().width-10.0f, 40.0f);
+
 	addGUIElement(std::move(colorPicker));
 	addGUIElement(std::move(drawingWindow));
 	addGUIElement(std::move(colorSelector));
+	addGUIElement(std::move(altCharsWindow));
 }
 void GameState_DrawingState::OnUpdate(void)
 {
