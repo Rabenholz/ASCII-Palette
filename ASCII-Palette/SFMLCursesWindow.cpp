@@ -53,10 +53,51 @@ void SFMLCursesWindow::clearTiles(std::string character, const sf::Color& textCo
 		}
 	}
 }
+void SFMLCursesWindow::setBorder(const SFMLCursesChar& borderChar)
+{
+	setBorder(borderChar,borderChar,borderChar,borderChar,borderChar,borderChar,borderChar,borderChar);
+}
+void SFMLCursesWindow::setBorder(const SFMLCursesChar& top, const SFMLCursesChar& bottom, const SFMLCursesChar& left, const SFMLCursesChar& right, 
+		const SFMLCursesChar& topLeftCorner, const SFMLCursesChar& topRightCorner, 
+		const SFMLCursesChar& bottomRightCorner, const SFMLCursesChar& bottomLeftCorner)
+{
+	setTile(topLeftCorner, sf::Vector2i(0,0));
+	for(int i = 1; i<m_cursesSize.y-1; i++)
+	{
+		setTile(top,sf::Vector2i(0,i));
+	}
+	setTile(topRightCorner, sf::Vector2i(0,m_cursesSize.y-1));
+	for(int i = 1; i<m_cursesSize.x-1; i++)
+	{
+		setTile(right,sf::Vector2i(i,m_cursesSize.y-1));
+	}
+	setTile(bottomRightCorner,sf::Vector2i(m_cursesSize.x-1,m_cursesSize.y-1));
+	for(int i = 1; i<m_cursesSize.y-1; i++)
+	{
+		setTile(bottom,sf::Vector2i(m_cursesSize.x-1,i));
+	}
+	setTile(bottomLeftCorner, sf::Vector2i(m_cursesSize.x-1,0));
+	for(int i = 1; i<m_cursesSize.x-1; i++)
+	{
+		setTile(left,sf::Vector2i(i,0));
+	}
+}
 void SFMLCursesWindow::setTile(const SFMLCursesChar& cursesChar, const sf::Vector2i& tilePos)
 {
 	m_tiles[tilePos.x][tilePos.y] = cursesChar;
 	m_tiles[tilePos.x][tilePos.y].setPosition(static_cast<float>(tilePos.y)*8.0f, static_cast<float>(tilePos.x)*12.0f);
+}
+void SFMLCursesWindow::setTiles(const std::string& text, const sf::Color& textColor, const sf::Color& backColor, const sf::Vector2i& tilePos)
+{
+	for(std::string::const_iterator stringIt(text.begin()); stringIt != text.end(); stringIt++)
+	{
+		unsigned int stringPos = stringIt - text.begin();
+
+		sf::Vector2i charPos(tilePos.x+((tilePos.y+stringPos)/m_cursesSize.y), (tilePos.y + stringPos)%m_cursesSize.y);
+		if(charPos.x >= m_cursesSize.x || charPos.y >= m_cursesSize.y)
+			break;
+		setTile(SFMLCursesChar(m_window,std::string("")+*stringIt,textColor,backColor),charPos);
+	}
 }
 const SFMLCursesChar& SFMLCursesWindow::getTile(const sf::Vector2i& lTilePos) const
 {

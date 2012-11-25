@@ -29,11 +29,21 @@ public:
 	void setAlignment(Alignment::E alignment);
 	Alignment::E getAlignment() const;
 
-	
+	void setTextColor(const sf::Color& color);
+	const sf::Color& getTextColor() const;
+	void setBackgroundColor(const sf::Color& color);
+	const sf::Color& getBackgroundColor() const;
+
+	void append(const std::string& text);
+
 protected:
 	void updateTextBox();
 
 	std::string m_text;
 	Alignment::E m_alignment;
+	sf::Color m_textColor;
+	sf::Color m_backColor;
+
+	sf::Vector2i finalCharPosition;
 };
 

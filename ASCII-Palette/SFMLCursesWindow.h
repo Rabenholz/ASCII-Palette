@@ -16,6 +16,11 @@ public:
 	void clearTiles();
 	void clearTiles(std::string character, const sf::Color& textColor, const sf::Color& backgroundColor);
 	void setTile(const SFMLCursesChar& cursesChar, const sf::Vector2i& tilePos);
+	void setBorder(const SFMLCursesChar& borderChar);
+	void setBorder(const SFMLCursesChar& top, const SFMLCursesChar& bottom, const SFMLCursesChar& left, const SFMLCursesChar& right, 
+		const SFMLCursesChar& topLeftCorner, const SFMLCursesChar& topRightCorner, 
+		const SFMLCursesChar& bottomRightCorner, const SFMLCursesChar& bottomLeftCorner);
+	void setTiles(const std::string& text, const sf::Color& textColor, const sf::Color& backColor, const sf::Vector2i& tilePos);
 
 	const SFMLCursesChar& getTile(const sf::Vector2i& lTilePos) const;
 

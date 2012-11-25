@@ -5,7 +5,10 @@
 SFMLCursesTextBox::SFMLCursesTextBox(const sf::Window& window, const sf::Vector2i& lCursesSize)
 	:SFMLCursesWindow(window, lCursesSize),
 	m_text(),
-	m_alignment(Alignment::Left)
+	m_alignment(Alignment::Left),
+	finalCharPosition(0,0),
+	m_textColor(sf::Color::White),
+	m_backColor(sf::Color::Black)
 {
 }
 
@@ -89,7 +92,7 @@ void SFMLCursesTextBox::updateTextBox()
 
 	}
 	*/
-	clearTiles(" ", sf::Color::White, sf::Color::Black);
+	clearTiles(" ", m_textColor, m_backColor);
 	std::string::const_iterator lineBegin(m_text.begin());
 	std::string::const_iterator lineEnd(m_text.begin());
 	unsigned int line = 0;
@@ -130,7 +133,7 @@ void SFMLCursesTextBox::updateTextBox()
 			}
 			for(lineBegin; lineBegin != lastLineEnd; lineBegin++)
 			{
-				setTile(SFMLCursesChar(m_window, std::string("") + *lineBegin), sf::Vector2i(line,col));
+				setTile(SFMLCursesChar(m_window, std::string("") + *lineBegin, m_textColor, m_backColor), sf::Vector2i(line,col));
 				switch(m_alignment)
 				{
 				case Alignment::Left:
@@ -153,12 +156,6 @@ void SFMLCursesTextBox::updateTextBox()
 					}
 					break;
 				}
-				//"a b"
-				//"a b c"
-				//"a b c d"
-				//"a  b  c  d  e"
-				//1. calculate whitespace on line, not including spaces
-				//2.add spaces in order - middle, left, right
 			}
 			if(lineBegin != m_text.end())
 				lineBegin++;
@@ -169,8 +166,30 @@ void SFMLCursesTextBox::updateTextBox()
 		}
 		if(line >= static_cast<unsigned int>(m_cursesSize.x))
 			break;
-		//"A cool string bro"
-		// 01234567890123456
 	}
 
+}
+
+void SFMLCursesTextBox::setTextColor(const sf::Color& color)
+{
+	m_textColor = color;
+	updateTextBox();
+}
+const sf::Color& SFMLCursesTextBox::getTextColor() const
+{
+	return m_textColor;
+}
+void SFMLCursesTextBox::setBackgroundColor(const sf::Color& color)
+{
+	m_backColor = color;
+	updateTextBox();
+}
+const sf::Color& SFMLCursesTextBox::getBackgroundColor() const
+{
+	return m_backColor;
+}
+
+void SFMLCursesTextBox::append(const std::string& text)
+{
+	setText(m_text.append(text));
 }
