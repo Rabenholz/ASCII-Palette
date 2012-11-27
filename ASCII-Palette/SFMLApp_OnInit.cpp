@@ -5,7 +5,7 @@
 
 bool SFMLApp::OnInit(void)
 {
-	m_mainWindow.create(sf::VideoMode(800, 600, 32), "ASCII-Palette");
+	m_mainWindow.create(sf::VideoMode(1100, 650, 32), "ASCII-Palette");
 
 	TextureManager& textureManager = TextureManager::getInstance();
 	sf::Image cursesAImage;

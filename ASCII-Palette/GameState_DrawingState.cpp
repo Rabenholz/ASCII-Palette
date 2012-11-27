@@ -25,7 +25,8 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	colorPicker->setPosition(m_window.getSize().x - colorPicker->getLocalBounds().width,
 		m_window.getSize().y - colorPicker->getLocalBounds().height);
 
-	std::unique_ptr<DrawingWindow> drawingWindow(new DrawingWindow(m_window, sf::Vector2i(25,80)));
+	//25,80
+	std::unique_ptr<DrawingWindow> drawingWindow(new DrawingWindow(m_window, sf::Vector2i(50,90)));
 	m_drawingWindow = drawingWindow.get();
 	drawingWindow->setPosition(20.0f,20.0f);
 
@@ -97,6 +98,9 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 		break;
 	case sf::Keyboard::Right:
 		m_drawingWindow->moveCursorRight();
+		break;
+	case sf::Keyboard::Back:
+		m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window," ",m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()));
 		break;
 	case sf::Keyboard::S:
 		if(control)
