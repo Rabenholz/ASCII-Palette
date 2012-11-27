@@ -87,11 +87,11 @@ std::ostream& operator<<(std::ostream& os, const SFMLCursesChar& cursesChar)
 	//character char r-g-b-a  back r-g-b-a \n
 	sf::Color charColor(cursesChar.getCharColor());
 	sf::Color backgroundColor(cursesChar.getBackgroundColor());
-	os<<static_cast<unsigned int>(cursesChar.m_character.c_str()[0])<<" ";
-	os<<static_cast<unsigned int>(charColor.r)<<" "<<static_cast<unsigned int>(charColor.g)<<
-		" "<<static_cast<unsigned int>(charColor.b)<<" "<<static_cast<unsigned int>(charColor.a)<<" ";
-	os<<static_cast<unsigned int>(backgroundColor.r)<<" "<<static_cast<unsigned int>(backgroundColor.g)<<
-		" "<<static_cast<unsigned int>(backgroundColor.b)<<" "<<static_cast<unsigned int>(backgroundColor.a)<<"\n";
+	os<<static_cast<int>(cursesChar.m_character.c_str()[0])<<" ";
+	os<<static_cast<int>(charColor.r)<<" "<<static_cast<int>(charColor.g)<<
+		" "<<static_cast<int>(charColor.b)<<" "<<static_cast<int>(charColor.a)<<" ";
+	os<<static_cast<int>(backgroundColor.r)<<" "<<static_cast<int>(backgroundColor.g)<<
+		" "<<static_cast<int>(backgroundColor.b)<<" "<<static_cast<int>(backgroundColor.a)<<"\n";
 	return os;
 }
 
