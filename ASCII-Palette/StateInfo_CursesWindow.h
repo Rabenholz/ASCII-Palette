@@ -6,7 +6,7 @@ class StateInfo_CursesWindow : public SFMLStateInfo
 {
 public:
 	StateInfo_CursesWindow(SFMLCursesWindow& cursesWindow)
-		:m_cursesWindow(cursesWindow) {}
+		:m_cursesWindow(&cursesWindow) {}
 	virtual ~StateInfo_CursesWindow() {}
-	SFMLCursesWindow& m_cursesWindow;
+	SFMLCursesWindow* m_cursesWindow;
 };

@@ -20,22 +20,22 @@ void GameState_SaveState::OnAwake(const SFMLStateInfo* lStateInfo)
 {
 	if(const StateInfo_CursesWindow* stateInfo = dynamic_cast<const StateInfo_CursesWindow*>(lStateInfo))
 	{
-		m_cursesWindow = &stateInfo->m_cursesWindow;
+		m_cursesWindow = stateInfo->m_cursesWindow;
 	}
 
 	m_filename = "";
 
-	std::unique_ptr<SFMLCursesWindow> border(new SFMLCursesWindow(m_window, sf::Vector2i(3,44)));
+	std::unique_ptr<SFMLCursesWindow> border(new SFMLCursesWindow(*m_window, sf::Vector2i(3,44)));
 	m_border = border.get();
-	border->setBorder(SFMLCursesChar(m_window,"-",sf::Color::Blue,sf::Color::Black),SFMLCursesChar(m_window,"-",sf::Color::Blue,sf::Color::Black),
-		SFMLCursesChar(m_window,"|",sf::Color::Blue,sf::Color::Black),SFMLCursesChar(m_window,"|",sf::Color::Blue,sf::Color::Black),
-		SFMLCursesChar(m_window,"+",sf::Color::Blue,sf::Color::Black),SFMLCursesChar(m_window,"+",sf::Color::Blue,sf::Color::Black),
-		SFMLCursesChar(m_window,"+",sf::Color::Blue,sf::Color::Black),SFMLCursesChar(m_window,"+",sf::Color::Blue,sf::Color::Black));
+	border->setBorder(SFMLCursesChar(*m_window,"-",sf::Color::Blue,sf::Color::Black),SFMLCursesChar(*m_window,"-",sf::Color::Blue,sf::Color::Black),
+		SFMLCursesChar(*m_window,"|",sf::Color::Blue,sf::Color::Black),SFMLCursesChar(*m_window,"|",sf::Color::Blue,sf::Color::Black),
+		SFMLCursesChar(*m_window,"+",sf::Color::Blue,sf::Color::Black),SFMLCursesChar(*m_window,"+",sf::Color::Blue,sf::Color::Black),
+		SFMLCursesChar(*m_window,"+",sf::Color::Blue,sf::Color::Black),SFMLCursesChar(*m_window,"+",sf::Color::Blue,sf::Color::Black));
 	border->setTiles("Save File", sf::Color(200,200,255,255), sf::Color::Black, sf::Vector2i(0,3));
 	border->setTiles("Filename:", sf::Color::White, sf::Color::Black, sf::Vector2i(1,1));
-	border->setPosition(m_window.getSize().x/2 - border->getLocalBounds().width/2.0f, 280.0f);
+	border->setPosition(m_window->getSize().x/2 - border->getLocalBounds().width/2.0f, 280.0f);
 
-	std::unique_ptr<SFMLCursesTextBox> filenameBox(new SFMLCursesTextBox(m_window, sf::Vector2i(1,32)));
+	std::unique_ptr<SFMLCursesTextBox> filenameBox(new SFMLCursesTextBox(*m_window, sf::Vector2i(1,32)));
 	m_filenameBox = filenameBox.get();
 	filenameBox->setPosition(border->getGlobalBounds().left + 11.0f*8.0f, border->getGlobalBounds().top + 12.0f);
 

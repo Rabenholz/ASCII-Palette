@@ -4,7 +4,7 @@
 
 SFMLColorPalette::SFMLColorPalette(const sf::Window& window, const sf::Image& colorImage, const sf::Texture& colorTexture)
 	:SFMLGUIElement(window),
-	 m_colorImage(colorImage), m_display(colorTexture), 
+	 m_colorImage(&colorImage), m_display(colorTexture), 
 	 m_backing(sf::Vector2f(static_cast<float>(colorTexture.getSize().x + 27.0f), static_cast<float>(colorTexture.getSize().y-1))), 
 	 m_colorMagnify(sf::Vector2f(50.0f,50.0f)),
 	 m_brightnessRect(sf::Vector2f(15.0f, colorTexture.getSize().y - 5.0f)),
@@ -87,7 +87,7 @@ void SFMLColorPalette::updateColorMagnify()
 	sf::Vector2i localMouse(getLocalPoint(sf::Mouse::getPosition(m_window)));
 	m_colorMagnify.setPosition(localMouseFloat.x - m_colorMagnify.getLocalBounds().width - 5.0f, 
 		localMouseFloat.y - m_colorMagnify.getLocalBounds().height - 5.0f);
-	m_colorMagnify.setFillColor(m_colorImage.getPixel(localMouse.x, localMouse.y) * 
+	m_colorMagnify.setFillColor(m_colorImage->getPixel(localMouse.x, localMouse.y) * 
 		sf::Color(static_cast<sf::Uint8>(m_brightness*255),static_cast<sf::Uint8>(m_brightness*255),static_cast<sf::Uint8>(m_brightness*255), 255));
 }
 
@@ -109,7 +109,7 @@ void SFMLColorPalette::onLeftClick()
 void SFMLColorPalette::selectColorAtMouse()
 {
 	sf::Vector2i localMouse(getLocalPoint(sf::Mouse::getPosition(m_window)));
-	m_selectedColor = m_colorImage.getPixel(localMouse.x, localMouse.y);
+	m_selectedColor = m_colorImage->getPixel(localMouse.x, localMouse.y);
 	m_brightnessQuad[0].color = m_selectedColor;
 	m_brightnessQuad[1].color = m_selectedColor;
 

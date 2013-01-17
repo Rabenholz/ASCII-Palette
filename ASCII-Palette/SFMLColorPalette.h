@@ -18,7 +18,7 @@ public:
 	void selectBrightnessAtMouse();
 
 private:
-	const sf::Image& m_colorImage;
+	const sf::Image* m_colorImage;
 	sf::Sprite m_display;
 	sf::RectangleShape m_backing;
 	sf::RectangleShape m_colorMagnify;

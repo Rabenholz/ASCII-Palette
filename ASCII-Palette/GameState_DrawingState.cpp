@@ -18,26 +18,27 @@ GameState_DrawingState::~GameState_DrawingState(void)
 
 void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 {
-	std::unique_ptr<SFMLColorPalette> colorPicker(new SFMLColorPalette(m_window, ImageManager::getInstance().getImage("ColorWheel"), 
+	std::unique_ptr<SFMLColorPalette> colorPicker(new SFMLColorPalette(*m_window, ImageManager::getInstance().getImage("ColorWheel"), 
 		TextureManager::getInstance().getTexture("ColorWheel")));
 	m_colorPicker = colorPicker.get();
 	colorPicker->addMouseLeftClickedFunction(std::make_shared<TFunctor<GameState_DrawingState>>(this, &GameState_DrawingState::updateColorSelector));
-	colorPicker->setPosition(m_window.getSize().x - colorPicker->getLocalBounds().width,
-		m_window.getSize().y - colorPicker->getLocalBounds().height);
+	colorPicker->setPosition(m_window->getSize().x - colorPicker->getLocalBounds().width,
+		m_window->getSize().y - colorPicker->getLocalBounds().height);
 
 	//25,80
-	std::unique_ptr<DrawingWindow> drawingWindow(new DrawingWindow(m_window, sf::Vector2i(50,90)));
+	std::unique_ptr<DrawingWindow> drawingWindow(new DrawingWindow(*m_window, sf::Vector2i(50,90)));
 	m_drawingWindow = drawingWindow.get();
 	drawingWindow->setPosition(20.0f,20.0f);
 
-	std::unique_ptr<ColorSelector> colorSelector(new ColorSelector(m_window));
+	std::unique_ptr<ColorSelector> colorSelector(new ColorSelector(*m_window));
 	m_colorSelector = colorSelector.get();
-	colorSelector->setPosition(m_window.getSize().x - colorSelector->getLocalBounds().width-50.0f, 200.0f);
+	colorSelector->setPosition(m_window->getSize().x - colorSelector->getLocalBounds().width-50.0f, 200.0f);
 
-	std::unique_ptr<AltCharsWindow> altCharsWindow(new AltCharsWindow(m_window));
+	std::unique_ptr<AltCharsWindow> altCharsWindow(new AltCharsWindow(*m_window));
 	m_altCharsWindow = altCharsWindow.get();
-	altCharsWindow->addMouseLeftClickedFunction(std::make_shared<TFunctor<GameState_DrawingState>>(this, &GameState_DrawingState::onAltCharClick));
-	altCharsWindow->setPosition(m_window.getSize().x - altCharsWindow->getLocalBounds().width-10.0f, 40.0f);
+	altCharsWindow->addMouseLeftClickedFunction(std::make_shared<TFunctor<GameState_DrawingState>>(
+		this, &GameState_DrawingState::onAltCharClick));
+	altCharsWindow->setPosition(m_window->getSize().x - altCharsWindow->getLocalBounds().width-10.0f, 40.0f);
 
 	//std::unique_ptr<SFMLCursesTextBox> textBox(new SFMLCursesTextBox(m_window, sf::Vector2i(10,20)));
 	//textBox->setPosition(200.0f, 200.0f);
@@ -79,7 +80,7 @@ void GameState_DrawingState::updateColorSelector()
 
 void GameState_DrawingState::onAltCharClick()
 {
-	m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window,m_altCharsWindow->getCharAtMouse(),
+	m_drawingWindow->setCursorCharacter(SFMLCursesChar(*m_window,m_altCharsWindow->getCharAtMouse(),
 		m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()));
 }
 
@@ -100,7 +101,8 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 		m_drawingWindow->moveCursorRight();
 		break;
 	case sf::Keyboard::Back:
-		m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window," ",m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()));
+		m_drawingWindow->setCursorCharacter(SFMLCursesChar(*m_window," ",m_colorSelector->getPrimaryColor(), 
+			m_colorSelector->getSecondaryColor()));
 		break;
 	case sf::Keyboard::S:
 		if(control)
@@ -126,6 +128,6 @@ void GameState_DrawingState::OnTextEntered(sf::Uint32 text)
 {
 	if(text < 32)
 		return;
-	m_drawingWindow->setCursorCharacter(SFMLCursesChar(m_window,std::string(sf::String(text)),
+	m_drawingWindow->setCursorCharacter(SFMLCursesChar(*m_window,std::string(sf::String(text)),
 		m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()));
 }
