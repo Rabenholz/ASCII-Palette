@@ -35,3 +35,5 @@ protected:
 
 std::ostream& operator<<(std::ostream& os, const SFMLCursesChar& cursesChar);
 std::istream& operator>>(std::istream& is, SFMLCursesChar& cursesChar);
+
+typedef std::vector<std::vector<SFMLCursesChar>> SFMLCursesCharRect;

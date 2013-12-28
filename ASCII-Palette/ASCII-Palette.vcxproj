@@ -82,11 +82,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AltCharsWindow.h" />
+    <ClInclude Include="CanvasCommand.h" />
     <ClInclude Include="ColorSelector.h" />
+    <ClInclude Include="CommandHistory.h" />
+    <ClInclude Include="CommandHistoryWindow.h" />
+    <ClInclude Include="CommandSetCharacters.h" />
     <ClInclude Include="DrawingWindow.h" />
     <ClInclude Include="GameState_LoadState.h" />
     <ClInclude Include="GameState_SaveState.h" />
     <ClInclude Include="SFMLCursesTextBox.h" />
+    <ClInclude Include="SFMLScrollWindow.h" />
     <ClInclude Include="StateInfo_CursesWindow.h" />
     <ClInclude Include="GameState_DrawingState.h" />
     <ClInclude Include="SFML-Template\AnimatedSprite.h" />
@@ -113,6 +118,9 @@
     <ClCompile Include="AltCharsWindow.cpp" />
     <ClCompile Include="ASCII-Palette.cpp" />
     <ClCompile Include="ColorSelector.cpp" />
+    <ClCompile Include="CommandHistory.cpp" />
+    <ClCompile Include="CommandHistoryWindow.cpp" />
+    <ClCompile Include="CommandSetCharacters.cpp" />
     <ClCompile Include="DrawingWindow.cpp" />
     <ClCompile Include="GameState_DrawingState.cpp" />
     <ClCompile Include="GameState_LoadState.cpp" />
@@ -137,6 +145,7 @@
     <ClCompile Include="SFMLCursesChar.cpp" />
     <ClCompile Include="SFMLCursesTextBox.cpp" />
     <ClCompile Include="SFMLCursesWindow.cpp" />
+    <ClCompile Include="SFMLScrollWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

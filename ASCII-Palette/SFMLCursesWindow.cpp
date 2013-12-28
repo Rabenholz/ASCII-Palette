@@ -99,9 +99,51 @@ void SFMLCursesWindow::setTiles(const std::string& text, const sf::Color& textCo
 		setTile(SFMLCursesChar(m_window,std::string("")+*stringIt,textColor,backColor),charPos);
 	}
 }
+
+void SFMLCursesWindow::setTiles(const SFMLCursesCharRect& characterRect, const sf::Vector2i& position)
+{
+	sf::Vector2i curPosition;
+	bool exitLoop = false;
+	for(size_t i = 0; i < characterRect.size(); i++)
+	{
+		curPosition.x = position.x + i;
+		if(static_cast<size_t>(curPosition.x) > m_tiles.size())
+			break;
+		for(size_t j = 0; j < characterRect.at(i).size(); j++)
+		{
+			curPosition.y = position.y + j;
+			if(static_cast<size_t>(curPosition.y) > m_tiles.at(curPosition.x).size())
+			{
+				exitLoop = true;
+				break;
+			}
+
+			setTile(characterRect.at(i).at(j), curPosition);
+		}
+		if(exitLoop)
+			break;
+	}
+}
+
 const SFMLCursesChar& SFMLCursesWindow::getTile(const sf::Vector2i& lTilePos) const
 {
 	return m_tiles.at(lTilePos.x).at(lTilePos.y);
+}
+
+SFMLCursesCharRect SFMLCursesWindow::copyTiles(const sf::Vector2i& position, const sf::Vector2i& size) const
+{
+	SFMLCursesCharRect charRect;
+	if(position.x < 0 || position.y < 0)
+		return charRect;
+	for(int x = position.x; x < position.x + size.x && x < m_cursesSize.x; x++)
+	{
+		charRect.push_back(std::vector<SFMLCursesChar>());
+		for(int y = position.y; y < position.y + size.y && position.y < m_cursesSize.y; y++)
+		{
+			charRect.at(x - position.x).push_back(m_tiles.at(x).at(y));
+		}
+	}
+	return charRect;
 }
 
 void SFMLCursesWindow::setCursesSize(const sf::Vector2i& lCursesSize)

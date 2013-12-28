@@ -1,12 +1,14 @@
 #include "StdAfx.h"
 #include "GameState_DrawingState.h"
+#include "CommandSetCharacters.h"
 
 
 GameState_DrawingState::GameState_DrawingState(const sf::Window& window)
 	:GameStateBase(window),
 	m_colorPicker(nullptr),
 	m_drawingWindow(nullptr),
-	m_colorSelector(nullptr)
+	m_colorSelector(nullptr),
+	m_commandHistoryWindow(nullptr)
 {
 	m_transparent = true;
 }
@@ -40,6 +42,10 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 		this, &GameState_DrawingState::onAltCharClick));
 	altCharsWindow->setPosition(m_window->getSize().x - altCharsWindow->getLocalBounds().width-10.0f, 40.0f);
 
+	std::unique_ptr<CommandHistoryWindow> commandHistoryWindow(new CommandHistoryWindow(*m_window, *m_drawingWindow));
+	m_commandHistoryWindow = commandHistoryWindow.get();
+	commandHistoryWindow->setPosition(m_drawingWindow->getGlobalBounds().left + m_drawingWindow->getGlobalBounds().width + 10.f, m_drawingWindow->getGlobalBounds().top);
+
 	//std::unique_ptr<SFMLCursesTextBox> textBox(new SFMLCursesTextBox(m_window, sf::Vector2i(10,20)));
 	//textBox->setPosition(200.0f, 200.0f);
 	//textBox->setAlignment(SFMLCursesTextBox::Alignment::Left);
@@ -50,6 +56,7 @@ void GameState_DrawingState::OnAwake(const SFMLStateInfo* lStateInfo)
 	addGUIElement(std::move(drawingWindow));
 	addGUIElement(std::move(colorSelector));
 	addGUIElement(std::move(altCharsWindow));
+	addGUIElement(std::move(commandHistoryWindow));
 	//addGUIElement(std::move(textBox));
 }
 void GameState_DrawingState::OnUpdate(void)
@@ -121,6 +128,12 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 	case sf::Keyboard::Escape:
 		m_messages.push_back(new SFMLStateMessage_Close());
 		break;
+	case sf::Keyboard::Z:
+			if(control && shift)
+				m_commandHistoryWindow->moveIndex(1);
+			else if(control)
+				m_commandHistoryWindow->moveIndex(-1);
+			break;
 	}
 }
 
@@ -128,6 +141,9 @@ void GameState_DrawingState::OnTextEntered(sf::Uint32 text)
 {
 	if(text < 32)
 		return;
-	m_drawingWindow->setCursorCharacter(SFMLCursesChar(*m_window,std::string(sf::String(text)),
-		m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()));
+	//m_drawingWindow->setCursorCharacter(SFMLCursesChar(*m_window,std::string(sf::String(text)),
+	//	m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()));
+	m_commandHistoryWindow->executeAndAddCommand(std::unique_ptr<CanvasCommand>(new CommandSetCharacters(
+		SFMLCursesChar(*m_window,std::string(sf::String(text)), m_colorSelector->getPrimaryColor(), m_colorSelector->getSecondaryColor()), 
+		sf::Vector2i(m_drawingWindow->getCursorPosition()))));
 }

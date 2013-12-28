@@ -9,6 +9,7 @@
 #include "GameState_LoadState.h"
 #include "GameState_SaveState.h"
 #include "SFMLCursesTextBox.h"
+#include "CommandHistoryWindow.h"
 #include <fstream>
 class GameState_DrawingState : public GameStateBase
 {
@@ -35,5 +36,7 @@ private:
 	DrawingWindow* m_drawingWindow;
 	ColorSelector* m_colorSelector;
 	AltCharsWindow* m_altCharsWindow;
+	CommandHistoryWindow* m_commandHistoryWindow;
+
 };
 

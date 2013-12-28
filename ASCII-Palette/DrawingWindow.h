@@ -11,6 +11,13 @@ public:
 	virtual sf::FloatRect getLocalBounds(void) const;
 	virtual sf::FloatRect getGlobalBounds(void) const;
 
+	void setCharacter(const SFMLCursesChar& character, sf::Vector2i position);
+	void setCharactersInRect(const SFMLCursesCharRect& characterRect, sf::Vector2i position);
+
+	SFMLCursesChar copyCharacter(sf::Vector2i position) const;
+	SFMLCursesCharRect copyCharactersInRect(sf::Vector2i position, sf::Vector2i size) const;
+
+	//cursor control
 	void setCursorCharacter(const SFMLCursesChar& character);
 	void moveCursorToPosition(sf::Vector2i position);
 	void moveCursorUp();
@@ -18,6 +25,7 @@ public:
 	void moveCursorLeft();
 	void moveCursorRight();
 
+	sf::Vector2i getCursorPosition() const;
 	SFMLCursesWindow& getCursesWindow(); //for saving - easier this way
 
 	void onLeftClick();

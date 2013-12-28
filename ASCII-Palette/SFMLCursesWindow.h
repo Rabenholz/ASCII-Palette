@@ -21,8 +21,10 @@ public:
 		const SFMLCursesChar& topLeftCorner, const SFMLCursesChar& topRightCorner, 
 		const SFMLCursesChar& bottomRightCorner, const SFMLCursesChar& bottomLeftCorner);
 	void setTiles(const std::string& text, const sf::Color& textColor, const sf::Color& backColor, const sf::Vector2i& tilePos);
+	void setTiles(const SFMLCursesCharRect& characterRect, const sf::Vector2i& position);
 
 	const SFMLCursesChar& getTile(const sf::Vector2i& lTilePos) const;
+	SFMLCursesCharRect copyTiles(const sf::Vector2i& position, const sf::Vector2i& size) const;
 
 	void setCursesSize(const sf::Vector2i& lCursesSize);
 	sf::Vector2i getCursesSize() const;

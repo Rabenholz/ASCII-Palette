@@ -25,6 +25,9 @@
     <Filter Include="SFMLApp\GameStates">
       <UniqueIdentifier>{887c1d77-dd4f-4225-a85c-0ad6e8d22ad6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{d42986bf-6baa-463e-9007-61c77ca141eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -111,6 +114,21 @@
     <ClInclude Include="StateInfo_CursesWindow.h">
       <Filter>SFMLApp</Filter>
     </ClInclude>
+    <ClInclude Include="CanvasCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHistory.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandSetCharacters.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLScrollWindow.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHistoryWindow.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML-Template\AnimatedSprite.cpp">
@@ -196,6 +214,18 @@
     </ClCompile>
     <ClCompile Include="SFMLCursesTextBox.cpp">
       <Filter>SFMLGUIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHistory.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandSetCharacters.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLScrollWindow.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHistoryWindow.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

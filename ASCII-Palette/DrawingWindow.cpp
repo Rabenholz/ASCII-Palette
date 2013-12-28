@@ -58,6 +58,28 @@ sf::FloatRect DrawingWindow::getGlobalBounds(void) const
 	return getTransform().transformRect(m_cursesWindow.getGlobalBounds());
 }
 
+void DrawingWindow::setCharacter(const SFMLCursesChar& character, sf::Vector2i position)
+{
+	m_cursesWindow.setTile(character, position);
+	if(position == m_cursorPosition)
+		updateCursorSprite();
+}
+
+void DrawingWindow::setCharactersInRect(const SFMLCursesCharRect& characterRect, sf::Vector2i position)
+{
+	m_cursesWindow.setTiles(characterRect, position);
+}
+
+SFMLCursesChar DrawingWindow::copyCharacter(sf::Vector2i position) const
+{
+	return m_cursesWindow.getTile(position);
+}
+
+SFMLCursesCharRect DrawingWindow::copyCharactersInRect(sf::Vector2i position, sf::Vector2i size) const
+{
+	return m_cursesWindow.copyTiles(position, size);
+}
+
 void DrawingWindow::setCursorCharacter(const SFMLCursesChar& character)
 {
 	m_cursesWindow.setTile(character, m_cursorPosition);
@@ -98,6 +120,11 @@ void DrawingWindow::moveCursorLeft()
 void DrawingWindow::moveCursorRight()
 {
 	moveCursorToPosition(sf::Vector2i(m_cursorPosition.x, m_cursorPosition.y+1));
+}
+
+sf::Vector2i DrawingWindow::getCursorPosition() const
+{
+	return m_cursorPosition;
 }
 
 SFMLCursesWindow& DrawingWindow::getCursesWindow()
