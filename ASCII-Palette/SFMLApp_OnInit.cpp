@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SFMLApp.h"
 #include <sstream>
-
+#include "GameState_NewDocState.h"
 
 bool SFMLApp::OnInit(void)
 {
@@ -41,6 +41,8 @@ bool SFMLApp::OnInit(void)
 	registerState(std::move(loadState), "Load");
 	std::unique_ptr<GameState_SaveState> saveState(new GameState_SaveState(m_mainWindow));
 	registerState(std::move(saveState), "Save");
+	std::unique_ptr<GameState_NewDocState> newDocState(new GameState_NewDocState(m_mainWindow));
+	registerState(std::move(newDocState), "NewDoc");
 	changeState("Drawing", nullptr);
 
 	return true;

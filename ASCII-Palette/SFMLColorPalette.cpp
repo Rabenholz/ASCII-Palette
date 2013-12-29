@@ -85,6 +85,8 @@ void SFMLColorPalette::updateColorMagnify()
 {
 	sf::Vector2f localMouseFloat(getLocalPoint(sf::Mouse::getPosition(m_window)));
 	sf::Vector2i localMouse(getLocalPoint(sf::Mouse::getPosition(m_window)));
+	if(!getLocalBounds().contains(localMouseFloat)) //SFML BUG: SOMETIMES MOUSE IS NOT IN BOUNDS
+		return;
 	m_colorMagnify.setPosition(localMouseFloat.x - m_colorMagnify.getLocalBounds().width - 5.0f, 
 		localMouseFloat.y - m_colorMagnify.getLocalBounds().height - 5.0f);
 	m_colorMagnify.setFillColor(m_colorImage->getPixel(localMouse.x, localMouse.y) * 

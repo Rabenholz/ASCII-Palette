@@ -3,21 +3,23 @@
 #include "DrawingWindow.h"
 
 
-CommandSetCharacters::CommandSetCharacters(const SFMLCursesChar& character, const sf::Vector2i& position)
+CommandSetCharacters::CommandSetCharacters(const SFMLCursesChar& character, const sf::Vector2i& position, const std::string& text)
 	:m_characters(),
 	 m_oldCharacters(),
 	 m_position(position),
-	 m_size(1,1)
+	 m_size(1,1),
+	 m_text(text)
 {
 	m_characters.push_back(std::vector<SFMLCursesChar>());
 	m_characters.at(0).push_back(character);
 }
 
-CommandSetCharacters::CommandSetCharacters(const SFMLCursesCharRect& characterRect, const sf::Vector2i position)
+CommandSetCharacters::CommandSetCharacters(const SFMLCursesCharRect& characterRect, const sf::Vector2i position, const std::string& text)
 	:m_characters(characterRect),
 	 m_oldCharacters(),
 	 m_position(position),
-	 m_size()
+	 m_size(),
+	 m_text(text)
 {
 	m_size.x = characterRect.size();
 	if(characterRect.size() > 0)
@@ -40,10 +42,12 @@ void CommandSetCharacters::undo(DrawingWindow& drawingWindow)
 	drawingWindow.setCharactersInRect(m_oldCharacters, m_position);
 }
 
-std::string CommandSetCharacters::getText()
+std::string CommandSetCharacters::getText() const
 {
-	std::string str("Set Character");
-	if(m_size.x > 1 || m_size.y > 1)
-		str += "s";
-	return str;
+	return m_text;
+}
+
+void CommandSetCharacters::setText(const std::string& text)
+{
+	m_text = text;
 }

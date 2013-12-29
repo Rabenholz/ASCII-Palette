@@ -10,6 +10,8 @@
 #include "GameState_SaveState.h"
 #include "SFMLCursesTextBox.h"
 #include "CommandHistoryWindow.h"
+#include "SFMLScrollWindow.h"
+
 #include <fstream>
 class GameState_DrawingState : public GameStateBase
 {
@@ -26,6 +28,8 @@ public:
 
 	void updateColorSelector();
 	void onAltCharClick();
+	
+
 
 	//SFMLEvent Overrides
 	virtual void OnKeyPressed(sf::Keyboard::Key key, bool alt, bool control, bool shift);
@@ -36,6 +40,7 @@ private:
 	DrawingWindow* m_drawingWindow;
 	ColorSelector* m_colorSelector;
 	AltCharsWindow* m_altCharsWindow;
+	SFMLScrollWindow* m_undoHistoryScroll;
 	CommandHistoryWindow* m_commandHistoryWindow;
 
 };

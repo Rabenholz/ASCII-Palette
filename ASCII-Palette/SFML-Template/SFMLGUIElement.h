@@ -20,6 +20,9 @@ public:
 	sf::Vector2i getLocalPoint(int x, int y) const;
 	sf::Vector2i getLocalPoint(const sf::Vector2i& point) const;
 
+	void setGlobalOffset(const sf::Vector2f& offset);
+	sf::Vector2f getGlobalOffset() const;
+
 	void OnMouseLeftPressed();
 	void OnMouseLeftReleased();
 	void OnMouseRightPressed();
@@ -43,6 +46,9 @@ public:
 	void addMouseRightClickedFunction(std::shared_ptr<TFunctorBase> func);
 	void addMouseMiddleClickedFunction(std::shared_ptr<TFunctorBase> func);
 	void addMouseRolloverFunction(std::shared_ptr<TFunctorBase> func);
+	void addGlobalMouseLeftReleasedFunction(std::shared_ptr<TFunctorBase> func);
+	void addGlobalMouseRightReleasedFunction(std::shared_ptr<TFunctorBase> func);
+	void addGlobalMouseMiddleReleasedFunction(std::shared_ptr<TFunctorBase> func);
 
 	void removeMouseLeftPressedFunction(TFunctorBase& func);
 	void removeMouseLeftReleasedFunction(TFunctorBase& func);
@@ -54,6 +60,9 @@ public:
 	void removeMouseRightClickedFunction(TFunctorBase& func);
 	void removeMouseMiddleClickedFunction(TFunctorBase& func);
 	void removeMouseRolloverFunction(TFunctorBase& func);
+	void removeGlobalMouseLeftReleasedFunction(TFunctorBase& func);
+	void removeGlobalMouseRightReleasedFunction(TFunctorBase& func);
+	void removeGlobalMouseMiddleReleasedFunction(TFunctorBase& func);
 
 	std::vector<std::shared_ptr<TFunctorBase>>::iterator getFunctionVectorIterator(
 		std::vector<std::shared_ptr<TFunctorBase>>& vec, TFunctorBase& func);
@@ -63,6 +72,7 @@ protected:
 	bool m_rightPressed;
 	bool m_middlePressed;
 	std::reference_wrapper<const sf::Window> m_window;
+	sf::Vector2f m_globalOffset; //"containing elements set their child's m_globalOffset so they can handle collision and mouse clicks correctly
 
 	std::vector<std::shared_ptr<TFunctorBase>> m_MouseLeftPressedfunc;
 	std::vector<std::shared_ptr<TFunctorBase>> m_MouseLeftReleasedfunc;
@@ -74,5 +84,8 @@ protected:
 	std::vector<std::shared_ptr<TFunctorBase>> m_MouseRightClickedfunc;
 	std::vector<std::shared_ptr<TFunctorBase>> m_MouseMiddleClickedfunc;
 	std::vector<std::shared_ptr<TFunctorBase>> m_MouseRolloverfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_GlobalMouseLeftReleasedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_GlobalMouseRightReleasedfunc;
+	std::vector<std::shared_ptr<TFunctorBase>> m_GlobalMouseMiddleReleasedfunc;
 };
 

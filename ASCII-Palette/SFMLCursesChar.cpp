@@ -2,7 +2,7 @@
 #include "SFMLCursesChar.h"
 
 
-SFMLCursesChar::SFMLCursesChar(const sf::Window& window, std::string character)
+SFMLCursesChar::SFMLCursesChar(const sf::Window& window,std::string character)
 	:SFMLGUIElement(window),
 	 m_character(character),
 	 m_backRect(TextureManager::getInstance().getTexture("Rectangle")), 

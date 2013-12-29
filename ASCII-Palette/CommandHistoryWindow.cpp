@@ -1,20 +1,24 @@
 #include "StdAfx.h"
 #include "CommandHistoryWindow.h"
 #include "CanvasCommand.h"
+#include "SFML-Template\FontManager.h"
 
 CommandHistoryWindow::CommandHistoryWindow(const sf::Window& window, DrawingWindow& drawingWindow)
 	:SFMLGUIElement(window),
 	m_commandHistory(drawingWindow),
 	m_commandList(),
 	m_iterator(m_commandList.end()),
-	m_entrySize(150, 30),
+	m_entrySize(150, 15),
 	m_rectangle(sf::Vector2f(m_entrySize.x, m_entrySize.y * 5.0f)),
 	m_selectedRectangle(m_entrySize),
 	m_normalRectangle(m_entrySize),
-	m_dullRectangle(m_entrySize)
+	m_dullRectangle(m_entrySize),
+	m_selectedText("", FontManager::getInstance().getFont("Arial"), 12U),
+	m_normalText("", FontManager::getInstance().getFont("Arial"), 12U),
+	m_dullText("", FontManager::getInstance().getFont("Arial"), 12U)
 {
 	m_rectangle.setFillColor(sf::Color(200,200,200));
-	m_rectangle.setOutlineThickness(1.f);
+	m_rectangle.setOutlineThickness(0.f);
 	m_rectangle.setOutlineColor(sf::Color::White);
 
 	m_selectedRectangle.setFillColor(sf::Color::Yellow);
@@ -28,6 +32,15 @@ CommandHistoryWindow::CommandHistoryWindow(const sf::Window& window, DrawingWind
 	m_dullRectangle.setFillColor(sf::Color::Black);
 	m_dullRectangle.setOutlineThickness(1.f);
 	m_dullRectangle.setOutlineColor(sf::Color::White);
+
+	m_selectedText.setColor(sf::Color::Black);
+	
+	m_normalText.setColor(sf::Color::White);
+
+	m_dullText.setColor(sf::Color(200,200,200));
+
+	addMouseLeftClickedFunction(std::make_shared<TFunctor<CommandHistoryWindow>>(this,&CommandHistoryWindow::moveIndexToMouse));
+
 }
 
 
@@ -48,16 +61,27 @@ void CommandHistoryWindow::draw(sf::RenderTarget& target, sf::RenderStates state
 		if(entryIt == m_iterator)
 		{
 			target.draw(m_selectedRectangle, states);
+			sf::Text text = m_selectedText;
+			text.setString(entryIt->m_text);
+			target.draw(text, states);
 			drawDull = true;
 		}
 		else if(drawDull)
 		{
 			target.draw(m_dullRectangle, states);
+			sf::Text text = m_dullText;
+			text.setString(entryIt->m_text);
+			target.draw(text, states);
 		}
 		else
 		{
 			target.draw(m_normalRectangle, states);
+			sf::Text text = m_normalText;
+			text.setString(entryIt->m_text);
+			target.draw(text, states);
 		}
+
+
 		index++;
 		states.transform.translate(0, m_entrySize.y);
 		//target.draw(entryIt->m_rectangle, states);
@@ -71,7 +95,8 @@ sf::FloatRect CommandHistoryWindow::getLocalBounds(void) const
 
 sf::FloatRect CommandHistoryWindow::getGlobalBounds(void) const
 {
-	return getTransform().transformRect(m_rectangle.getGlobalBounds());
+	sf::Transform transform = getTransform();
+	return transform.translate(getGlobalOffset()).transformRect(m_rectangle.getGlobalBounds());
 }
 
 void CommandHistoryWindow::executeAndAddCommand(std::unique_ptr<CanvasCommand> command)
@@ -93,6 +118,8 @@ void CommandHistoryWindow::executeAndAddCommand(std::unique_ptr<CanvasCommand> c
 	{
 		m_commandList.pop_front();
 	}
+
+	m_rectangle.setSize(sf::Vector2f(m_rectangle.getSize().x, m_commandList.size() * m_entrySize.y));
 }
 
 void CommandHistoryWindow::moveIndex(int delta)
@@ -113,4 +140,13 @@ void CommandHistoryWindow::moveIndex(int delta)
 		m_iterator++;
 		delta--;
 	}
+}
+
+void CommandHistoryWindow::moveIndexToMouse()
+{
+	sf::Vector2f localMouseFloat(getLocalPoint(sf::Mouse::getPosition(m_window)));
+	if(!getLocalBounds().contains(localMouseFloat)) //SFML BUG: SOMETIMES MOUSE IS NOT IN BOUNDS
+		return;
+	int clickedIndex = static_cast<int>(localMouseFloat.y / m_entrySize.y);
+	moveIndex(clickedIndex - std::distance(m_commandList.begin(), m_iterator));
 }

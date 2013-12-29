@@ -61,6 +61,8 @@ void AltCharsWindow::updateCharMagnify()
 {
 	sf::Vector2f localMouseFloat(getLocalPoint(sf::Mouse::getPosition(m_window)));
 	sf::Vector2i localMouse(getLocalPoint(sf::Mouse::getPosition(m_window)));
+	if(!getLocalBounds().contains(localMouseFloat)) //SFML BUG: SOMETIMES MOUSE IS NOT IN BOUNDS
+		return;
 	m_charMagnify.setPosition(localMouseFloat.x - m_charMagnify.getLocalBounds().width*m_charMagnify.getScale().x - 5.0f, 
 		localMouseFloat.y - m_charMagnify.getLocalBounds().height*m_charMagnify.getScale().y - 5.0f);
 

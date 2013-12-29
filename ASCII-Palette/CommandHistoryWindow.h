@@ -21,6 +21,8 @@ public:
 	void executeAndAddCommand(std::unique_ptr<CanvasCommand> command);
 	void moveIndex(int delta); //negative = backwards in history
 
+	void moveIndexToMouse();
+
 protected:
 	CommandHistory m_commandHistory;
 	std::list<CommandHistoryEntry> m_commandList;
@@ -32,5 +34,8 @@ protected:
 	sf::RectangleShape m_dullRectangle;
 
 	sf::RectangleShape m_rectangle;
+	sf::Text m_selectedText;
+	sf::Text m_normalText;
+	sf::Text m_dullText;
 };
 

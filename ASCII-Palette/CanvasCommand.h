@@ -9,6 +9,6 @@ public:
 
 	virtual void execute(DrawingWindow& drawingWindow) = 0;
 	virtual void undo(DrawingWindow& drawingWindow) = 0;
-	virtual std::string getText() = 0;
+	virtual std::string getText() const = 0;
 };
 

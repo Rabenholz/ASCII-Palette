@@ -132,6 +132,12 @@
     <ClInclude Include="StateInfo_CursesWindowLoadResult.h">
       <Filter>SFMLApp\GameStates</Filter>
     </ClInclude>
+    <ClInclude Include="GameState_NewDocState.h">
+      <Filter>SFML-Template\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateInfo_NewDocResult.h">
+      <Filter>SFMLApp\GameStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML-Template\AnimatedSprite.cpp">
@@ -228,6 +234,9 @@
       <Filter>SFML-Template\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommandHistoryWindow.cpp">
+      <Filter>SFML-Template\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState_NewDocState.cpp">
       <Filter>SFML-Template\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
