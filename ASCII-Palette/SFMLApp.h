@@ -33,7 +33,7 @@ public:
 	void unregisterState(std::string stateID); //can invalidate active states
 	void changeState(std::string stateID, SFMLStateInfo* stateInfo); //replaces the current state
 	void pushState(std::string stateID, SFMLStateInfo* stateInfo);
-	void popState(void);
+	void popState(SFMLStateInfo* stateInfo);
 	void removeState(std::string stateID);
 
 	GameStateBase* getState(std::string stateID);

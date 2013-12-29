@@ -129,6 +129,9 @@
     <ClInclude Include="CommandHistoryWindow.h">
       <Filter>SFML-Template\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StateInfo_CursesWindowLoadResult.h">
+      <Filter>SFMLApp\GameStates</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFML-Template\AnimatedSprite.cpp">

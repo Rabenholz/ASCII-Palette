@@ -71,9 +71,10 @@ public:
 class SFMLStateMessage_PopState : public SFMLStateMessage
 {
 public:
-	SFMLStateMessage_PopState(void)
-		:SFMLStateMessage(SFMLStateMessage::Type::PopState){}
+	SFMLStateMessage_PopState(SFMLStateInfo::ptr stateInfo)
+		:SFMLStateMessage(SFMLStateMessage::Type::PopState), m_stateInfo(std::move(stateInfo)) {}
 	virtual ~SFMLStateMessage_PopState(void) {}
+	SFMLStateInfo::ptr m_stateInfo;
 };
 
 class SFMLStateMessage_RemoveState : public SFMLStateMessage

@@ -60,11 +60,11 @@ void GameState_SaveState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool con
 		if(m_filename.length() > 0)
 		{
 			saveAPF(m_filename);
-			m_messages.push_back(new SFMLStateMessage_PopState());
+			m_messages.push_back(new SFMLStateMessage_PopState(nullptr));
 		}
 		break;
 	case sf::Keyboard::Escape:
-		m_messages.push_back(new SFMLStateMessage_PopState());
+		m_messages.push_back(new SFMLStateMessage_PopState(nullptr));
 		break;
 	}
 }

@@ -17,7 +17,7 @@ public:
 	virtual void OnTextEntered(sf::Uint32 text);
 
 private:
-	SFMLCursesWindow* m_cursesWindow;
+	std::unique_ptr<SFMLCursesWindow> m_loadedCursesWindow;
 	SFMLCursesWindow* m_border;
 	SFMLCursesTextBox* m_filenameBox;
 	SFMLCursesWindow* m_fileNotFoundDialog;

@@ -127,6 +127,11 @@ sf::Vector2i DrawingWindow::getCursorPosition() const
 	return m_cursorPosition;
 }
 
+sf::Vector2i  DrawingWindow::getCursesSize() const
+{
+	return m_cursesWindow.getCursesSize();
+}
+
 SFMLCursesWindow& DrawingWindow::getCursesWindow()
 {
 	return m_cursesWindow;

@@ -30,7 +30,7 @@ public:
 	virtual void OnRender(sf::RenderTarget& target) {drawDisplayList(target);}
 	virtual void OnCleanup(void) {Cleanup();}
 	virtual void OnSuspend(void) {}
-	virtual void OnResume(void) {}
+	virtual void OnResume(const SFMLStateInfo* lStateInfo) {}
 
 	//OnUpdate() called on all active states, then OnRender()
 

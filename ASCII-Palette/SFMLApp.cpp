@@ -78,7 +78,7 @@ void SFMLApp::pushState(std::string stateID, SFMLStateInfo* stateInfo)
 	m_states.back()->OnAwake(stateInfo);
 }
 
-void SFMLApp::popState(void)
+void SFMLApp::popState(SFMLStateInfo* stateInfo)
 {
 	if(m_states.size() > 0)
 	{
@@ -86,7 +86,7 @@ void SFMLApp::popState(void)
 		m_states.pop_back();
 	}
 	if(m_states.size() > 0)
-	m_states.back()->OnResume();
+	m_states.back()->OnResume(stateInfo);
 }
 
 void SFMLApp::removeState(std::string stateID)
@@ -146,8 +146,8 @@ void SFMLApp::decipherMessage(SFMLStateMessage* message)
 		}
 	case SFMLStateMessage::Type::PopState:
 		{
-		//SFMLStateMessage_PopState* msg = dynamic_cast<SFMLStateMessage_PopState*>(message);
-		popState();
+		SFMLStateMessage_PopState* msg = dynamic_cast<SFMLStateMessage_PopState*>(message);
+		popState(msg->m_stateInfo.get());
 		break;
 		}
 	case SFMLStateMessage::Type::RemoveState:

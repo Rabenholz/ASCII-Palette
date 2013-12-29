@@ -26,6 +26,7 @@ public:
 	void moveCursorRight();
 
 	sf::Vector2i getCursorPosition() const;
+	sf::Vector2i getCursesSize() const;
 	SFMLCursesWindow& getCursesWindow(); //for saving - easier this way
 
 	void onLeftClick();

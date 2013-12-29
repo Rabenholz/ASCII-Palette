@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "GameState_DrawingState.h"
 #include "CommandSetCharacters.h"
+#include "StateInfo_CursesWindowLoadResult.h"
 
 
 GameState_DrawingState::GameState_DrawingState(const sf::Window& window)
@@ -76,8 +77,16 @@ void GameState_DrawingState::OnCleanup(void)
 void GameState_DrawingState::OnSuspend(void)
 {
 }
-void GameState_DrawingState::OnResume(void)
+void GameState_DrawingState::OnResume(const SFMLStateInfo* stateInfo)
 {
+	if(const StateInfo_CursesWindowLoadResult* stateInfoLoad = dynamic_cast<const StateInfo_CursesWindowLoadResult*>(stateInfo))
+	{
+		if(stateInfoLoad->m_result)
+		{
+			m_commandHistoryWindow->executeAndAddCommand(std::unique_ptr<CanvasCommand>(new CommandSetCharacters(stateInfoLoad->m_cursesWindow->copyTiles(sf::Vector2i(0,0), stateInfoLoad->m_cursesWindow->getCursesSize()), 
+		sf::Vector2i(0,0))));
+		}
+	}
 }
 
 void GameState_DrawingState::updateColorSelector()
@@ -121,8 +130,9 @@ void GameState_DrawingState::OnKeyPressed(sf::Keyboard::Key key, bool alt, bool 
 	case sf::Keyboard::L:
 		if(control)
 		{
-			m_messages.push_back(new SFMLStateMessage_PushState("Load",
-			std::unique_ptr<StateInfo_CursesWindow>(new StateInfo_CursesWindow(m_drawingWindow->getCursesWindow()))));
+			m_messages.push_back(new SFMLStateMessage_PushState("Load", nullptr));
+			//m_messages.push_back(new SFMLStateMessage_PushState("Load",
+			//std::unique_ptr<StateInfo_CursesWindow>(new StateInfo_CursesWindow(m_drawingWindow->getCursesWindow()))));
 		}
 		break;
 	case sf::Keyboard::Escape:

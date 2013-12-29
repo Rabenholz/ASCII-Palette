@@ -22,7 +22,7 @@ public:
 	virtual void OnRender(sf::RenderTarget& target);
 	virtual void OnCleanup(void);
 	virtual void OnSuspend(void);
-	virtual void OnResume(void);
+	virtual void OnResume(const SFMLStateInfo* stateInfo);
 
 	void updateColorSelector();
 	void onAltCharClick();
